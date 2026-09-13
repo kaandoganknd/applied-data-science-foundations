@@ -22,4 +22,4 @@ The project reports associations, not causal effects. The data cannot show that 
 - `syntax/cardio_good_fitness_customer_profiles.sps` — reproducible IBM SPSS Statistics workflow.
 - `data/README.md` — data dictionary and reproduction notes.
 
-The original CSV is excluded because its redistribution terms are not established. A coursework report that contained group members' names and student numbers is also not published. The public repository contains only the reproducible analysis and non-identifying findings.
+The source CSV is included so the SPSS workflow can be reproduced directly. The coursework report is not published because its cover page contains group members' names and student numbers; the public project instead presents the same reproducible analysis and non-identifying findings.

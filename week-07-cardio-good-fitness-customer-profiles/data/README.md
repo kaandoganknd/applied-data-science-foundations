@@ -1,6 +1,6 @@
 # Source Data
 
-Place `CardioGoodFitness.csv` in this directory or update the path in the SPSS syntax before running it.
+`CardioGoodFitness.csv` is included in this directory. Update the file path in the SPSS syntax if you clone the repository to another location.
 
 ## Variables
 
