@@ -144,7 +144,7 @@ def main():
         question_text += [f'- {part}' for part in item['subtasks']]
         if item['subtasks']:
             question_text.append('')
-    (docs / 'questions.md').write_text('\n'.join(question_text) + '\n')
+    (docs / 'questions.md').write_text('\n'.join(question_text).rstrip() + '\n')
     report = ['# Executed Creditcard queries', '',
               f'MySQL {version}. Read-only queries on the 15 unchanged reference records in `financial_db.creditcard`.', '',
               'Questions 1–4 use the existing setup; the structure below was read again in this run. Questions 5–13 are listed in source order with complete outputs.', '',
@@ -158,7 +158,7 @@ def main():
         if result['question'] == 8:
             report += ['Q8 is interpreted as ordering all cards by descending limit; Q9 selects only the maximum-limit card(s).', '']
         with (out / f"q{result['question']:02d}.csv").open('w', newline='') as stream:
-            writer = csv.writer(stream)
+            writer = csv.writer(stream, lineterminator='\n')
             writer.writerow(result['columns'])
             writer.writerows(result['rows'])
     (out / 'query-results.md').write_text('\n'.join(report))

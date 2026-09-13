@@ -34,4 +34,3 @@ Numbering follows the original Word list, including the six subparts of question
 ## 12. List all credit cards that were issued with credit limits of £1200, £3000 and £4500.
 
 ## 13. List all credit cards that were not issued in London?
-
