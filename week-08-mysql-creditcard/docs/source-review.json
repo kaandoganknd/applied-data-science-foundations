@@ -5,6 +5,9 @@
     },
     "INSERT INTO CreditCard.docx": {
       "sha256": "71bc85d9f83cb4de92da5cc17235dec009886f605b5ddda4507ff7ecb4110131"
+    },
+    "CREDITCARD SCRIPT W7 - FULL SOLUTION.txt": {
+      "sha256": "5ca38881ae8c529d0a263b61f335a4570bdd32951a0c9da268751de664c86f79"
     }
   },
   "excel_rows": 15,
@@ -21,11 +24,13 @@
     "CardHolder": 15,
     "Issue_Date": 10
   },
-  "loaded_values": "INSERT INTO CreditCard.docx",
-  "normalizations": [
-    "Excel serial dates and SQL dates converted to YYYY-MM-DD",
-    "Excel numeric identifiers converted to four-character strings",
-    "Table name standardized to Creditcard; Totalspent matches Excel heading",
+  "authoritative_solution": "CREDITCARD SCRIPT W7 - FULL SOLUTION.txt",
+  "loaded_values": "Full solution INSERT statements; identical to the earlier Word document",
+  "full_solution_byte_identical": true,
+  "csv_display_only": [
+    "Excel serial dates and SQL dates shown as YYYY-MM-DD",
+    "Numeric identifiers displayed as strings in source comparisons",
     "Money displayed with two decimal places"
-  ]
+  ],
+  "sql_changes_to_full_solution": []
 }

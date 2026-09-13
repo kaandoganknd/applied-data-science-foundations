@@ -1,6 +1,6 @@
 SELECT CreditcardNum, Creditcard_company, Creditcard_type, Credit_Limit,
        Totalspent, City, CardHolder, Issue_Date
-FROM Creditcard
+FROM creditcard
 ORDER BY CreditcardNum;
 
 SELECT COUNT(*) AS row_count,
@@ -9,4 +9,4 @@ SELECT COUNT(*) AS row_count,
        SUM(Credit_Limit IS NULL) AS missing_limits,
        SUM(Credit_Limit) AS total_credit_limit,
        SUM(Totalspent) AS total_spent
-FROM Creditcard;
+FROM creditcard;

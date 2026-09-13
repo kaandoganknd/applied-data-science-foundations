@@ -1,21 +1,117 @@
 {
-  "verified_at_utc": "2026-09-13T16:32:18.223665+00:00",
+  "verified_at_utc": "2026-09-13T16:39:58.053857+00:00",
   "mysql_version": "9.7.1",
   "edition": "MySQL Community Server - GPL",
   "sql_mode": "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION",
   "lower_case_table_names": 2,
-  "schema": "week08_creditcard",
+  "schema": "financial_db",
+  "full_solution_byte_identical": true,
+  "solution_sha256": "5ca38881ae8c529d0a263b61f335a4570bdd32951a0c9da268751de664c86f79",
+  "source_statement_count": 18,
+  "source_warnings": [
+    {
+      "statement_number": 4,
+      "level": "Warning",
+      "code": 4095,
+      "message": "Delimiter '/' in position 4 in datetime value '2018/12/12' at row 1 is deprecated. Prefer the standard '-'."
+    },
+    {
+      "statement_number": 5,
+      "level": "Warning",
+      "code": 4095,
+      "message": "Delimiter '/' in position 4 in datetime value '2018/10/11' at row 1 is deprecated. Prefer the standard '-'."
+    },
+    {
+      "statement_number": 6,
+      "level": "Warning",
+      "code": 4095,
+      "message": "Delimiter '/' in position 4 in datetime value '2019/07/05' at row 1 is deprecated. Prefer the standard '-'."
+    },
+    {
+      "statement_number": 7,
+      "level": "Warning",
+      "code": 4095,
+      "message": "Delimiter '/' in position 4 in datetime value '2019/04/04' at row 1 is deprecated. Prefer the standard '-'."
+    },
+    {
+      "statement_number": 8,
+      "level": "Warning",
+      "code": 4095,
+      "message": "Delimiter '/' in position 4 in datetime value '2019/04/20' at row 1 is deprecated. Prefer the standard '-'."
+    },
+    {
+      "statement_number": 9,
+      "level": "Warning",
+      "code": 4095,
+      "message": "Delimiter '/' in position 4 in datetime value '2018/04/20' at row 1 is deprecated. Prefer the standard '-'."
+    },
+    {
+      "statement_number": 10,
+      "level": "Warning",
+      "code": 4095,
+      "message": "Delimiter '/' in position 4 in datetime value '2019/05/02' at row 1 is deprecated. Prefer the standard '-'."
+    },
+    {
+      "statement_number": 11,
+      "level": "Warning",
+      "code": 4095,
+      "message": "Delimiter '/' in position 4 in datetime value '2020/05/02' at row 1 is deprecated. Prefer the standard '-'."
+    },
+    {
+      "statement_number": 12,
+      "level": "Warning",
+      "code": 4095,
+      "message": "Delimiter '/' in position 4 in datetime value '2019/01/17' at row 1 is deprecated. Prefer the standard '-'."
+    },
+    {
+      "statement_number": 13,
+      "level": "Warning",
+      "code": 4095,
+      "message": "Delimiter '/' in position 4 in datetime value '2020/01/20' at row 1 is deprecated. Prefer the standard '-'."
+    },
+    {
+      "statement_number": 14,
+      "level": "Warning",
+      "code": 4095,
+      "message": "Delimiter '/' in position 4 in datetime value '2020/01/22' at row 1 is deprecated. Prefer the standard '-'."
+    },
+    {
+      "statement_number": 15,
+      "level": "Warning",
+      "code": 4095,
+      "message": "Delimiter '/' in position 4 in datetime value '2018/10/10' at row 1 is deprecated. Prefer the standard '-'."
+    },
+    {
+      "statement_number": 16,
+      "level": "Warning",
+      "code": 4095,
+      "message": "Delimiter '/' in position 4 in datetime value '2018/05/04' at row 1 is deprecated. Prefer the standard '-'."
+    },
+    {
+      "statement_number": 17,
+      "level": "Warning",
+      "code": 4095,
+      "message": "Delimiter '/' in position 4 in datetime value '2019/03/03' at row 1 is deprecated. Prefer the standard '-'."
+    },
+    {
+      "statement_number": 18,
+      "level": "Warning",
+      "code": 4095,
+      "message": "Delimiter '/' in position 4 in datetime value '2019/11/12' at row 1 is deprecated. Prefer the standard '-'."
+    }
+  ],
   "loaded_rows": 15,
   "source_match": "15 of 15 INSERT-document rows, all eight fields",
-  "passed_constraint_cases": 28,
+  "passed_constraint_cases": 31,
   "failed_constraint_cases": 0,
   "records_unchanged_after_tests": true,
   "sql_sha256": {
-    "00_select_database.sql": "94f8686acf3754dcc733c1c1111e1091ea652638348ee3e83b818d559e2e0dd6",
-    "01_create_table.sql": "8f3d3fb1f4b53f25805413b2765a2d299bdf7609580a4f435278ea4848ea8cd0",
-    "02_insert_records.sql": "37d6431bec2eb393ca78976ab71a743713292f62eda7a6823e04461c321a6b1a",
-    "03_inspect_table.sql": "ed243c56ce8cfa47a57ab68eccb6d1e5eeab17a9f10693eea2f9f2262ad9ade2",
-    "04_verify_records.sql": "f80abc89ff5dfab2f8f6445e56556277d86e286823e930b90ac6c505ea373206"
+    "00_select_database.sql": "f58fa5d31e1bea7db848f075bc6a5fab33aea2c05268e886a5adec1decc4d606",
+    "01_create_table.sql": "120c0a31dcb5bd6fc1e05db64b7dcd007a18273ef1a038798977d8195272978a",
+    "02_insert_records.sql": "6ca65b4bf5c8310976b15c4b1fa6fc359c59868043466a91742c256bb47ec5c2",
+    "03_inspect_table.sql": "b3b6766206fc930bfab9118aba44bf947dcdfb21d4ffca4e063f533df3707475",
+    "04_verify_records.sql": "14d92fdae4d32640201a5a81d7f335aba8eb64d5e2c6acacbff101fc715f835b",
+    "full_solution.sql": "5ca38881ae8c529d0a263b61f335a4570bdd32951a0c9da268751de664c86f79"
   },
   "cases": [
     {
@@ -30,21 +126,21 @@
       "expected_error": 3819,
       "observed_error": 3819,
       "result": "PASS",
-      "server_message": "Check constraint 'chk_credit_limit_positive' is violated."
+      "server_message": "Check constraint 'cc_ch_creditlimit' is violated."
     },
     {
       "test": "Negative credit limit",
       "expected_error": 3819,
       "observed_error": 3819,
       "result": "PASS",
-      "server_message": "Check constraint 'chk_credit_limit_positive' is violated."
+      "server_message": "Check constraint 'cc_ch_creditlimit' is violated."
     },
     {
       "test": "Zero credit limit on UPDATE",
       "expected_error": 3819,
       "observed_error": 3819,
       "result": "PASS",
-      "server_message": "Check constraint 'chk_credit_limit_positive' is violated."
+      "server_message": "Check constraint 'cc_ch_creditlimit' is violated."
     },
     {
       "test": "NULL CreditcardNum",
@@ -68,20 +164,6 @@
       "server_message": "Column 'Creditcard_type' cannot be null"
     },
     {
-      "test": "NULL Credit_Limit",
-      "expected_error": 1048,
-      "observed_error": 1048,
-      "result": "PASS",
-      "server_message": "Column 'Credit_Limit' cannot be null"
-    },
-    {
-      "test": "NULL Totalspent",
-      "expected_error": 1048,
-      "observed_error": 1048,
-      "result": "PASS",
-      "server_message": "Column 'Totalspent' cannot be null"
-    },
-    {
       "test": "NULL City",
       "expected_error": 1048,
       "observed_error": 1048,
@@ -103,25 +185,60 @@
       "server_message": "Column 'Issue_Date' cannot be null"
     },
     {
-      "test": "Short practice identifier",
-      "expected_error": 3819,
-      "observed_error": 3819,
+      "test": "NULL credit limit allowed by reference",
+      "expected_error": null,
+      "observed_error": null,
       "result": "PASS",
-      "server_message": "Check constraint 'chk_practice_card_identifier' is violated."
+      "server_message": "Accepted; transaction rolled back"
     },
     {
-      "test": "Nonnumeric practice identifier",
-      "expected_error": 3819,
-      "observed_error": 3819,
+      "test": "NULL total spent allowed by reference",
+      "expected_error": null,
+      "observed_error": null,
       "result": "PASS",
-      "server_message": "Check constraint 'chk_practice_card_identifier' is violated."
+      "server_message": "Accepted; transaction rolled back"
     },
     {
-      "test": "Identifier exceeds four characters",
-      "expected_error": 1406,
-      "observed_error": 1406,
+      "test": "Short numeric identifier allowed",
+      "expected_error": null,
+      "observed_error": null,
       "result": "PASS",
-      "server_message": "Data too long for column 'CreditcardNum' at row 1"
+      "server_message": "Accepted; transaction rolled back"
+    },
+    {
+      "test": "Nonnumeric identifier",
+      "expected_error": 1366,
+      "observed_error": 1366,
+      "result": "PASS",
+      "server_message": "Incorrect integer value: 'ABCD' for column 'CreditcardNum' at row 1"
+    },
+    {
+      "test": "Five-digit SMALLINT identifier allowed",
+      "expected_error": null,
+      "observed_error": null,
+      "result": "PASS",
+      "server_message": "Accepted; transaction rolled back"
+    },
+    {
+      "test": "SMALLINT upper boundary",
+      "expected_error": null,
+      "observed_error": null,
+      "result": "PASS",
+      "server_message": "Accepted; transaction rolled back"
+    },
+    {
+      "test": "SMALLINT lower boundary",
+      "expected_error": null,
+      "observed_error": null,
+      "result": "PASS",
+      "server_message": "Accepted; transaction rolled back"
+    },
+    {
+      "test": "SMALLINT overflow",
+      "expected_error": 1264,
+      "observed_error": 1264,
+      "result": "PASS",
+      "server_message": "Out of range value for column 'CreditcardNum' at row 1"
     },
     {
       "test": "Too long Creditcard_company",
@@ -180,7 +297,7 @@
       "server_message": "Accepted; transaction rolled back"
     },
     {
-      "test": "Leading zero identifier",
+      "test": "Leading zero converted to integer 1",
       "expected_error": null,
       "observed_error": null,
       "result": "PASS",

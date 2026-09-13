@@ -3,63 +3,62 @@
 MySQL 9.7.1 (MySQL Community Server - GPL). All results below were fetched from the server.
 
 ```sql
-DESCRIBE Creditcard;
+DESCRIBE creditcard;
 ```
 
 | Field | Type | Null | Key | Default | Extra |
 | --- | --- | --- | --- | --- | --- |
-| CreditcardNum | char(4) | NO | PRI | NULL |  |
-| Creditcard_company | varchar(50) | NO |  | NULL |  |
-| Creditcard_type | varchar(30) | NO |  | NULL |  |
-| Credit_Limit | decimal(10,2) | NO |  | NULL |  |
-| Totalspent | decimal(10,2) | NO |  | NULL |  |
+| CreditcardNum | smallint | NO | PRI | NULL |  |
+| Creditcard_company | varchar(100) | NO |  | NULL |  |
+| Creditcard_type | varchar(50) | NO |  | NULL |  |
+| Credit_Limit | decimal(9,2) | YES |  | NULL |  |
+| Totalspent | decimal(9,2) | YES |  | NULL |  |
 | City | varchar(50) | NO |  | NULL |  |
 | CardHolder | varchar(100) | NO |  | NULL |  |
 | Issue_Date | date | NO |  | NULL |  |
 
 ```sql
-SHOW CREATE TABLE Creditcard;
+SHOW CREATE TABLE creditcard;
 ```
 
 ```sql
-CREATE TABLE `Creditcard` (
-  `CreditcardNum` char(4) NOT NULL,
-  `Creditcard_company` varchar(50) NOT NULL,
-  `Creditcard_type` varchar(30) NOT NULL,
-  `Credit_Limit` decimal(10,2) NOT NULL,
-  `Totalspent` decimal(10,2) NOT NULL,
+CREATE TABLE `creditcard` (
+  `CreditcardNum` smallint NOT NULL,
+  `Creditcard_company` varchar(100) NOT NULL,
+  `Creditcard_type` varchar(50) NOT NULL,
+  `Credit_Limit` decimal(9,2) DEFAULT NULL,
+  `Totalspent` decimal(9,2) DEFAULT NULL,
   `City` varchar(50) NOT NULL,
   `CardHolder` varchar(100) NOT NULL,
   `Issue_Date` date NOT NULL,
   PRIMARY KEY (`CreditcardNum`),
-  CONSTRAINT `chk_credit_limit_positive` CHECK ((`Credit_Limit` > 0)),
-  CONSTRAINT `chk_practice_card_identifier` CHECK (regexp_like(`CreditcardNum`,_utf8mb4'^[0-9]{4}$',_utf8mb4'c'))
+  CONSTRAINT `cc_ch_creditlimit` CHECK ((`Credit_Limit` > 0))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 ```
 
 ```sql
-SHOW INDEX FROM Creditcard;
+SHOW INDEX FROM creditcard;
 ```
 
 | Table | Non_unique | Key_name | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment | Visible | Expression |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Creditcard | 0 | PRIMARY | 1 | CreditcardNum | A | 1 | NULL | NULL |  | BTREE |  |  | YES | NULL |
+| creditcard | 0 | PRIMARY | 1 | CreditcardNum | A | 2 | NULL | NULL |  | BTREE |  |  | YES | NULL |
 
 ```sql
 SELECT COLUMN_NAME, COLUMN_TYPE, IS_NULLABLE, CHARACTER_MAXIMUM_LENGTH,
        NUMERIC_PRECISION, NUMERIC_SCALE, COLUMN_KEY
 FROM information_schema.COLUMNS
-WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'Creditcard'
+WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'creditcard'
 ORDER BY ORDINAL_POSITION;
 ```
 
 | COLUMN_NAME | COLUMN_TYPE | IS_NULLABLE | CHARACTER_MAXIMUM_LENGTH | NUMERIC_PRECISION | NUMERIC_SCALE | COLUMN_KEY |
 | --- | --- | --- | --- | --- | --- | --- |
-| CreditcardNum | char(4) | NO | 4 | NULL | NULL | PRI |
-| Creditcard_company | varchar(50) | NO | 50 | NULL | NULL |  |
-| Creditcard_type | varchar(30) | NO | 30 | NULL | NULL |  |
-| Credit_Limit | decimal(10,2) | NO | NULL | 10 | 2 |  |
-| Totalspent | decimal(10,2) | NO | NULL | 10 | 2 |  |
+| CreditcardNum | smallint | NO | NULL | 5 | 0 | PRI |
+| Creditcard_company | varchar(100) | NO | 100 | NULL | NULL |  |
+| Creditcard_type | varchar(50) | NO | 50 | NULL | NULL |  |
+| Credit_Limit | decimal(9,2) | YES | NULL | 9 | 2 |  |
+| Totalspent | decimal(9,2) | YES | NULL | 9 | 2 |  |
 | City | varchar(50) | NO | 50 | NULL | NULL |  |
 | CardHolder | varchar(100) | NO | 100 | NULL | NULL |  |
 | Issue_Date | date | NO | NULL | NULL | NULL |  |
@@ -70,20 +69,19 @@ FROM information_schema.TABLE_CONSTRAINTS AS tc
 LEFT JOIN information_schema.CHECK_CONSTRAINTS AS cc
     ON cc.CONSTRAINT_SCHEMA = tc.CONSTRAINT_SCHEMA
    AND cc.CONSTRAINT_NAME = tc.CONSTRAINT_NAME
-WHERE tc.TABLE_SCHEMA = DATABASE() AND tc.TABLE_NAME = 'Creditcard'
+WHERE tc.TABLE_SCHEMA = DATABASE() AND tc.TABLE_NAME = 'creditcard'
 ORDER BY tc.CONSTRAINT_TYPE, tc.CONSTRAINT_NAME;
 ```
 
 | CONSTRAINT_NAME | CONSTRAINT_TYPE | ENFORCED | CHECK_CLAUSE |
 | --- | --- | --- | --- |
-| chk_credit_limit_positive | CHECK | YES | (`Credit_Limit` > 0) |
-| chk_practice_card_identifier | CHECK | YES | regexp_like(`CreditcardNum`,_utf8mb4\'^[0-9]{4}$\',_utf8mb4\'c\') |
+| cc_ch_creditlimit | CHECK | YES | (`Credit_Limit` > 0) |
 | PRIMARY | PRIMARY KEY | YES | NULL |
 
 ```sql
 SELECT CreditcardNum, Creditcard_company, Creditcard_type, Credit_Limit,
        Totalspent, City, CardHolder, Issue_Date
-FROM Creditcard
+FROM creditcard
 ORDER BY CreditcardNum;
 ```
 
@@ -112,7 +110,7 @@ SELECT COUNT(*) AS row_count,
        SUM(Credit_Limit IS NULL) AS missing_limits,
        SUM(Credit_Limit) AS total_credit_limit,
        SUM(Totalspent) AS total_spent
-FROM Creditcard;
+FROM creditcard;
 ```
 
 | row_count | distinct_identifiers | nonpositive_limits | missing_limits | total_credit_limit | total_spent |

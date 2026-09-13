@@ -1,4 +1,4 @@
-"""Extract both supplied files and reconcile records without changing source values."""
+"""Preserve the full solution exactly and reconcile its records with both earlier sources."""
 
 import csv
 import hashlib
@@ -70,6 +70,20 @@ def read_sources():
 
 def main():
     excel, inserts, statements = read_sources()
+    solution = ROOT / "sources/CREDITCARD SCRIPT W7 - FULL SOLUTION.txt"
+    raw = solution.read_bytes()
+    solution_text = raw.decode("utf-8")
+    solution_inserts = [line.strip() for line in solution_text.splitlines() if line.startswith("INSERT INTO")]
+    if solution_inserts != statements:
+        raise ValueError("Full solution INSERT statements differ from the earlier Word source")
+    parts = [part.strip() + ";" for part in solution_text.split(";") if part.strip()]
+    if len(parts) != 18 or not parts[2].startswith("CREATE TABLE IF NOT EXISTS creditcard"):
+        raise ValueError("Unexpected full solution structure")
+    (ROOT / "sql/full_solution.sql").write_bytes(raw)
+    for name, selected in [("00_select_database.sql", parts[:2]),
+                           ("01_create_table.sql", parts[2:3]),
+                           ("02_insert_records.sql", parts[3:])]:
+        (ROOT / "sql" / name).write_text("\n\n".join(selected).replace("\r\n", "\n") + "\n", encoding="utf-8")
     for name, rows in [("creditcard_excel.csv", excel), ("creditcard_insert.csv", inserts)]:
         write_csv(ROOT / "data" / name, FIELDS, rows)
     (ROOT / "sources/original_inserts.sql").write_text("\n".join(statements) + "\n", encoding="utf-8")
@@ -82,7 +96,7 @@ def main():
                    for key in sorted(left) for field in FIELDS if left[key][field] != right[key][field]]
     write_csv(ROOT / "docs/source-differences.csv",
               ["CreditcardNum", "column", "excel_value", "insert_document_value"], differences)
-    source_files = [ROOT / "sources/Creditcard_table.xls", ROOT / "sources/INSERT INTO CreditCard.docx"]
+    source_files = [ROOT / "sources/Creditcard_table.xls", ROOT / "sources/INSERT INTO CreditCard.docx", solution]
     review = {
         "files": {p.name: {"sha256": hashlib.sha256(p.read_bytes()).hexdigest()} for p in source_files},
         "excel_rows": len(excel), "insert_rows": len(inserts),
@@ -90,20 +104,14 @@ def main():
         "records_with_differences": len({r['CreditcardNum'] for r in differences}),
         "column_max_characters_across_both_sources": {
             c: max(len(r[c]) for r in excel + inserts) for c in FIELDS},
-        "loaded_values": "INSERT INTO CreditCard.docx",
-        "normalizations": ["Excel serial dates and SQL dates converted to YYYY-MM-DD",
-                           "Excel numeric identifiers converted to four-character strings",
-                           "Table name standardized to Creditcard; Totalspent matches Excel heading",
-                           "Money displayed with two decimal places"]}
+        "authoritative_solution": solution.name,
+        "loaded_values": "Full solution INSERT statements; identical to the earlier Word document",
+        "full_solution_byte_identical": (ROOT / "sql/full_solution.sql").read_bytes() == raw,
+        "csv_display_only": ["Excel serial dates and SQL dates shown as YYYY-MM-DD",
+                             "Numeric identifiers displayed as strings in source comparisons",
+                             "Money displayed with two decimal places"],
+        "sql_changes_to_full_solution": []}
     (ROOT / "docs/source-review.json").write_text(json.dumps(review, indent=2) + "\n", encoding="utf-8")
-    sql = ["-- All 15 records from the supplied INSERT document; values are preserved.",
-           "-- Identifier case and date notation are standardized for MySQL portability.",
-           "START TRANSACTION;", ""]
-    for row in inserts:
-        values = [row[c] if c in AMOUNTS else "'" + row[c].replace("'", "''") + "'" for c in FIELDS]
-        sql.append("INSERT INTO Creditcard (" + ", ".join(FIELDS) + ")\nVALUES (" + ", ".join(values) + ");\n")
-    sql.append("COMMIT;")
-    (ROOT / "sql/02_insert_records.sql").write_text("\n".join(sql) + "\n", encoding="utf-8")
     print(json.dumps(review, indent=2))
     for row in differences:
         print(row)
