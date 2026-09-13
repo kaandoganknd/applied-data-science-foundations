@@ -1,0 +1,5 @@
+CreditcardNum,Creditcard_company,Creditcard_type,Credit_Limit,Totalspent,City,CardHolder,Issue_Date
+2332,Capital One,Visa,3000.00,1200.00,Birmingham,Paul Carter,2019-07-05
+3334,Virgin Credit,Mastercard,1200.00,867.30,Aberdeen,Mario Brothers,2019-01-17
+4489,Natwest,Visa,3000.00,1450.45,Birmingham,Paul Carter,2018-05-04
+4578,Barclaycard,Mastercard,4500.00,4325.60,Aberdeen,Julia Kathy,2020-01-22

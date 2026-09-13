@@ -71,6 +71,8 @@ The supplied four-digit identifiers are stored as `SMALLINT` in the reference. L
 
 ## References
 
+Continue with [Creditcard Queries in MySQL](../week-09-mysql-creditcard-queries/) for the next activity on this unchanged table.
+
 - [MySQL CHECK constraints](https://dev.mysql.com/doc/refman/8.0/en/create-table-check-constraints.html) — enforcement and the interaction with `NULL`.
 - [MySQL DECIMAL](https://dev.mysql.com/doc/refman/8.0/en/fixed-point-types.html) — exact numeric storage for the two amount columns.
 - [MySQL SHOW COLUMNS](https://dev.mysql.com/doc/refman/8.0/en/show-columns.html) — table structure inspection with `DESCRIBE` and `SHOW COLUMNS`.

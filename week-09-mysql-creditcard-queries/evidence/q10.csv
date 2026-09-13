@@ -1,0 +1,6 @@
+CreditcardNum,Creditcard_company,Creditcard_type,Credit_Limit,Totalspent,City,CardHolder,Issue_Date
+1212,Capital One,Visa,5000.00,3476.50,London,Krystal Jones,2019-11-12
+3333,American Express,American Express,3500.00,1243.20,London,Paul Jones,2020-05-02
+3556,Egg,Mastercard,4000.00,2300.00,London,Paul Jones,2019-04-20
+4456,Barclaycard,Mastercard,10000.00,3500.39,London,John Smith,2018-10-11
+4535,Egg,Mastercard,1500.00,1234.40,London,Paul Jones,2018-12-12

@@ -11,6 +11,7 @@ Each folder contains the analysis code, a concise summary of the findings, and c
 - [SPSS Statistical Investigation and Hypothesis Testing](week-04-statistical-investigation-and-hypothesis-testing/) — data-quality checks, descriptive statistics, normality diagnostics, research questions, null-hypothesis tests, and visualisations for salary, house-price, and daily-weather data.
 - [CardioGood Fitness Customer Profiles](week-07-cardio-good-fitness-customer-profiles/) — SPSS descriptive analytics, customer profiles, product-line comparisons, and association tests for three treadmill products.
 - [Creditcard Table Design and Validation in MySQL](week-08-mysql-creditcard/) — eight-column schema, primary key, enforced constraints, 15 source records, source reconciliation, and executed MySQL validation results.
+- [Creditcard Queries in MySQL](week-09-mysql-creditcard-queries/) — questions 1–13, continuing the same table with record counts, distinct companies, sorting, a maximum-limit subquery, and city/limit filters with complete executed outputs.
 
 ## Tools
 

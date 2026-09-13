@@ -1,0 +1,601 @@
+{
+  "verified_at_utc": "2026-09-13T17:06:00.247886+00:00",
+  "mysql_version": "9.7.1",
+  "lower_case_table_names": 2,
+  "sql_mode": "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION",
+  "schema": "financial_db",
+  "table": "creditcard",
+  "reference_rows": 15,
+  "source_question_numbers": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13
+  ],
+  "newly_executed_questions": [
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13
+  ],
+  "passed_query_checks": 9,
+  "failed_query_checks": 0,
+  "comparison": "Every result cell compared with independent Python calculations on the reference INSERT CSV",
+  "schema_matches_reference": true,
+  "records_match_reference": true,
+  "schema_and_records_unchanged": true,
+  "transaction_read_only": true,
+  "input_sha256": {
+    "week-09-mysql-creditcard-queries/sources/MySQL Activities W8-W9.docx": "adc9e0b87be2e30f39b0e2d3f222129d30ebbb7864531b0a02a3391a5a46286a",
+    "week-09-mysql-creditcard-queries/sql/questions_05_to_13.sql": "2a3bf9535bea1601820af93c2413562f0caf24d074413a598bf392ef9da7e299",
+    "week-08-mysql-creditcard/data/creditcard_insert.csv": "7fb09605cee6b0ce54c90b1191ba4db9e8c2bba353f958f89fa3879b8a1b04c0",
+    "week-08-mysql-creditcard/sql/full_solution.sql": "5ca38881ae8c529d0a263b61f335a4570bdd32951a0c9da268751de664c86f79",
+    "week-08-mysql-creditcard/evidence/show-create-table.sql": "67de5a2c85cdebdd0d0935896d45c089d5b8207fb9b93b3b45c7b7d1bf4c3b6c"
+  },
+  "results": [
+    {
+      "question": 5,
+      "title": "Number of records.",
+      "sql": "SELECT COUNT(*) AS record_count\nFROM creditcard;",
+      "columns": [
+        "record_count"
+      ],
+      "rows": [
+        [
+          15
+        ]
+      ],
+      "row_count": 1,
+      "check": "PASS"
+    },
+    {
+      "question": 6,
+      "title": "Number of distinct credit card companies, not card types or records.",
+      "sql": "SELECT COUNT(DISTINCT Creditcard_company) AS company_count\nFROM creditcard;",
+      "columns": [
+        "company_count"
+      ],
+      "rows": [
+        [
+          8
+        ]
+      ],
+      "row_count": 1,
+      "check": "PASS"
+    },
+    {
+      "question": 7,
+      "title": "List of distinct credit card companies.",
+      "sql": "SELECT DISTINCT Creditcard_company\nFROM creditcard\nORDER BY Creditcard_company;",
+      "columns": [
+        "Creditcard_company"
+      ],
+      "rows": [
+        [
+          "American Express"
+        ],
+        [
+          "Barclaycard"
+        ],
+        [
+          "Capital One"
+        ],
+        [
+          "Coutts Bank"
+        ],
+        [
+          "Egg"
+        ],
+        [
+          "MBNA"
+        ],
+        [
+          "Natwest"
+        ],
+        [
+          "Virgin Credit"
+        ]
+      ],
+      "row_count": 8,
+      "check": "PASS"
+    },
+    {
+      "question": 8,
+      "title": "All cards ordered from highest to lowest credit limit.",
+      "sql": "SELECT *\nFROM creditcard\nORDER BY Credit_Limit DESC, CreditcardNum;",
+      "columns": [
+        "CreditcardNum",
+        "Creditcard_company",
+        "Creditcard_type",
+        "Credit_Limit",
+        "Totalspent",
+        "City",
+        "CardHolder",
+        "Issue_Date"
+      ],
+      "rows": [
+        [
+          2456,
+          "Coutts Bank",
+          "Mastercard",
+          "50000.00",
+          "2567.77",
+          "Aberdeen",
+          "Mario Brothers",
+          "2020-01-20"
+        ],
+        [
+          4323,
+          "Natwest",
+          "Mastercard",
+          "24000.00",
+          "7325.50",
+          "Glasgow",
+          "John Mackay",
+          "2018-10-10"
+        ],
+        [
+          3434,
+          "Capital One",
+          "Mastercard",
+          "20000.00",
+          "5420.75",
+          "Birmingham",
+          "Stanley Mathews",
+          "2019-05-02"
+        ],
+        [
+          3557,
+          "Natwest",
+          "Visa",
+          "12000.00",
+          "4002.10",
+          "Aberdeen",
+          "Julia Kathy",
+          "2018-04-20"
+        ],
+        [
+          4456,
+          "Barclaycard",
+          "Mastercard",
+          "10000.00",
+          "3500.39",
+          "London",
+          "John Smith",
+          "2018-10-11"
+        ],
+        [
+          1212,
+          "Capital One",
+          "Visa",
+          "5000.00",
+          "3476.50",
+          "London",
+          "Krystal Jones",
+          "2019-11-12"
+        ],
+        [
+          3554,
+          "MBNA",
+          "Visa",
+          "5000.00",
+          "3450.75",
+          "Aberdeen",
+          "Julia Kathy",
+          "2019-04-04"
+        ],
+        [
+          4578,
+          "Barclaycard",
+          "Mastercard",
+          "4500.00",
+          "4325.60",
+          "Aberdeen",
+          "Julia Kathy",
+          "2020-01-22"
+        ],
+        [
+          3343,
+          "Virgin Credit",
+          "Visa",
+          "4000.00",
+          "2300.50",
+          "Glasgow",
+          "John Mackay",
+          "2019-03-03"
+        ],
+        [
+          3556,
+          "Egg",
+          "Mastercard",
+          "4000.00",
+          "2300.00",
+          "London",
+          "Paul Jones",
+          "2019-04-20"
+        ],
+        [
+          3333,
+          "American Express",
+          "American Express",
+          "3500.00",
+          "1243.20",
+          "London",
+          "Paul Jones",
+          "2020-05-02"
+        ],
+        [
+          2332,
+          "Capital One",
+          "Visa",
+          "3000.00",
+          "1200.00",
+          "Birmingham",
+          "Paul Carter",
+          "2019-07-05"
+        ],
+        [
+          4489,
+          "Natwest",
+          "Visa",
+          "3000.00",
+          "1450.45",
+          "Birmingham",
+          "Paul Carter",
+          "2018-05-04"
+        ],
+        [
+          4535,
+          "Egg",
+          "Mastercard",
+          "1500.00",
+          "1234.40",
+          "London",
+          "Paul Jones",
+          "2018-12-12"
+        ],
+        [
+          3334,
+          "Virgin Credit",
+          "Mastercard",
+          "1200.00",
+          "867.30",
+          "Aberdeen",
+          "Mario Brothers",
+          "2019-01-17"
+        ]
+      ],
+      "row_count": 15,
+      "check": "PASS"
+    },
+    {
+      "question": 9,
+      "title": "Card(s) with the highest limit; retain every tie.",
+      "sql": "SELECT *\nFROM creditcard\nWHERE Credit_Limit = (SELECT MAX(Credit_Limit) FROM creditcard)\nORDER BY CreditcardNum;",
+      "columns": [
+        "CreditcardNum",
+        "Creditcard_company",
+        "Creditcard_type",
+        "Credit_Limit",
+        "Totalspent",
+        "City",
+        "CardHolder",
+        "Issue_Date"
+      ],
+      "rows": [
+        [
+          2456,
+          "Coutts Bank",
+          "Mastercard",
+          "50000.00",
+          "2567.77",
+          "Aberdeen",
+          "Mario Brothers",
+          "2020-01-20"
+        ]
+      ],
+      "row_count": 1,
+      "check": "PASS"
+    },
+    {
+      "question": 10,
+      "title": "Cards issued in London.",
+      "sql": "SELECT *\nFROM creditcard\nWHERE City = 'London'\nORDER BY CreditcardNum;",
+      "columns": [
+        "CreditcardNum",
+        "Creditcard_company",
+        "Creditcard_type",
+        "Credit_Limit",
+        "Totalspent",
+        "City",
+        "CardHolder",
+        "Issue_Date"
+      ],
+      "rows": [
+        [
+          1212,
+          "Capital One",
+          "Visa",
+          "5000.00",
+          "3476.50",
+          "London",
+          "Krystal Jones",
+          "2019-11-12"
+        ],
+        [
+          3333,
+          "American Express",
+          "American Express",
+          "3500.00",
+          "1243.20",
+          "London",
+          "Paul Jones",
+          "2020-05-02"
+        ],
+        [
+          3556,
+          "Egg",
+          "Mastercard",
+          "4000.00",
+          "2300.00",
+          "London",
+          "Paul Jones",
+          "2019-04-20"
+        ],
+        [
+          4456,
+          "Barclaycard",
+          "Mastercard",
+          "10000.00",
+          "3500.39",
+          "London",
+          "John Smith",
+          "2018-10-11"
+        ],
+        [
+          4535,
+          "Egg",
+          "Mastercard",
+          "1500.00",
+          "1234.40",
+          "London",
+          "Paul Jones",
+          "2018-12-12"
+        ]
+      ],
+      "row_count": 5,
+      "check": "PASS"
+    },
+    {
+      "question": 11,
+      "title": "Cards issued in Aberdeen with a limit strictly greater than GBP 5,000.",
+      "sql": "SELECT *\nFROM creditcard\nWHERE City = 'Aberdeen' AND Credit_Limit > 5000\nORDER BY CreditcardNum;",
+      "columns": [
+        "CreditcardNum",
+        "Creditcard_company",
+        "Creditcard_type",
+        "Credit_Limit",
+        "Totalspent",
+        "City",
+        "CardHolder",
+        "Issue_Date"
+      ],
+      "rows": [
+        [
+          2456,
+          "Coutts Bank",
+          "Mastercard",
+          "50000.00",
+          "2567.77",
+          "Aberdeen",
+          "Mario Brothers",
+          "2020-01-20"
+        ],
+        [
+          3557,
+          "Natwest",
+          "Visa",
+          "12000.00",
+          "4002.10",
+          "Aberdeen",
+          "Julia Kathy",
+          "2018-04-20"
+        ]
+      ],
+      "row_count": 2,
+      "check": "PASS"
+    },
+    {
+      "question": 12,
+      "title": "Cards with any of the three specified credit limits.",
+      "sql": "SELECT *\nFROM creditcard\nWHERE Credit_Limit IN (1200, 3000, 4500)\nORDER BY CreditcardNum;",
+      "columns": [
+        "CreditcardNum",
+        "Creditcard_company",
+        "Creditcard_type",
+        "Credit_Limit",
+        "Totalspent",
+        "City",
+        "CardHolder",
+        "Issue_Date"
+      ],
+      "rows": [
+        [
+          2332,
+          "Capital One",
+          "Visa",
+          "3000.00",
+          "1200.00",
+          "Birmingham",
+          "Paul Carter",
+          "2019-07-05"
+        ],
+        [
+          3334,
+          "Virgin Credit",
+          "Mastercard",
+          "1200.00",
+          "867.30",
+          "Aberdeen",
+          "Mario Brothers",
+          "2019-01-17"
+        ],
+        [
+          4489,
+          "Natwest",
+          "Visa",
+          "3000.00",
+          "1450.45",
+          "Birmingham",
+          "Paul Carter",
+          "2018-05-04"
+        ],
+        [
+          4578,
+          "Barclaycard",
+          "Mastercard",
+          "4500.00",
+          "4325.60",
+          "Aberdeen",
+          "Julia Kathy",
+          "2020-01-22"
+        ]
+      ],
+      "row_count": 4,
+      "check": "PASS"
+    },
+    {
+      "question": 13,
+      "title": "Cards not issued in London. City is NOT NULL in the source schema.",
+      "sql": "SELECT *\nFROM creditcard\nWHERE City <> 'London'\nORDER BY CreditcardNum;",
+      "columns": [
+        "CreditcardNum",
+        "Creditcard_company",
+        "Creditcard_type",
+        "Credit_Limit",
+        "Totalspent",
+        "City",
+        "CardHolder",
+        "Issue_Date"
+      ],
+      "rows": [
+        [
+          2332,
+          "Capital One",
+          "Visa",
+          "3000.00",
+          "1200.00",
+          "Birmingham",
+          "Paul Carter",
+          "2019-07-05"
+        ],
+        [
+          2456,
+          "Coutts Bank",
+          "Mastercard",
+          "50000.00",
+          "2567.77",
+          "Aberdeen",
+          "Mario Brothers",
+          "2020-01-20"
+        ],
+        [
+          3334,
+          "Virgin Credit",
+          "Mastercard",
+          "1200.00",
+          "867.30",
+          "Aberdeen",
+          "Mario Brothers",
+          "2019-01-17"
+        ],
+        [
+          3343,
+          "Virgin Credit",
+          "Visa",
+          "4000.00",
+          "2300.50",
+          "Glasgow",
+          "John Mackay",
+          "2019-03-03"
+        ],
+        [
+          3434,
+          "Capital One",
+          "Mastercard",
+          "20000.00",
+          "5420.75",
+          "Birmingham",
+          "Stanley Mathews",
+          "2019-05-02"
+        ],
+        [
+          3554,
+          "MBNA",
+          "Visa",
+          "5000.00",
+          "3450.75",
+          "Aberdeen",
+          "Julia Kathy",
+          "2019-04-04"
+        ],
+        [
+          3557,
+          "Natwest",
+          "Visa",
+          "12000.00",
+          "4002.10",
+          "Aberdeen",
+          "Julia Kathy",
+          "2018-04-20"
+        ],
+        [
+          4323,
+          "Natwest",
+          "Mastercard",
+          "24000.00",
+          "7325.50",
+          "Glasgow",
+          "John Mackay",
+          "2018-10-10"
+        ],
+        [
+          4489,
+          "Natwest",
+          "Visa",
+          "3000.00",
+          "1450.45",
+          "Birmingham",
+          "Paul Carter",
+          "2018-05-04"
+        ],
+        [
+          4578,
+          "Barclaycard",
+          "Mastercard",
+          "4500.00",
+          "4325.60",
+          "Aberdeen",
+          "Julia Kathy",
+          "2020-01-22"
+        ]
+      ],
+      "row_count": 10,
+      "check": "PASS"
+    }
+  ]
+}
