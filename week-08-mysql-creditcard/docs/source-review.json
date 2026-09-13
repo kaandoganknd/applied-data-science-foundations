@@ -1,0 +1,31 @@
+{
+  "files": {
+    "Creditcard_table.xls": {
+      "sha256": "db532674734a79c85e06d0b1878304807928d9fc9e582347cbdf8e1c61654396"
+    },
+    "INSERT INTO CreditCard.docx": {
+      "sha256": "71bc85d9f83cb4de92da5cc17235dec009886f605b5ddda4507ff7ecb4110131"
+    }
+  },
+  "excel_rows": 15,
+  "insert_rows": 15,
+  "different_cells": 11,
+  "records_with_differences": 8,
+  "column_max_characters_across_both_sources": {
+    "CreditcardNum": 4,
+    "Creditcard_company": 18,
+    "Creditcard_type": 16,
+    "Credit_Limit": 8,
+    "Totalspent": 7,
+    "City": 10,
+    "CardHolder": 15,
+    "Issue_Date": 10
+  },
+  "loaded_values": "INSERT INTO CreditCard.docx",
+  "normalizations": [
+    "Excel serial dates and SQL dates converted to YYYY-MM-DD",
+    "Excel numeric identifiers converted to four-character strings",
+    "Table name standardized to Creditcard; Totalspent matches Excel heading",
+    "Money displayed with two decimal places"
+  ]
+}

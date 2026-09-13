@@ -1,0 +1,218 @@
+{
+  "verified_at_utc": "2026-09-13T16:32:18.223665+00:00",
+  "mysql_version": "9.7.1",
+  "edition": "MySQL Community Server - GPL",
+  "sql_mode": "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION",
+  "lower_case_table_names": 2,
+  "schema": "week08_creditcard",
+  "loaded_rows": 15,
+  "source_match": "15 of 15 INSERT-document rows, all eight fields",
+  "passed_constraint_cases": 28,
+  "failed_constraint_cases": 0,
+  "records_unchanged_after_tests": true,
+  "sql_sha256": {
+    "00_select_database.sql": "94f8686acf3754dcc733c1c1111e1091ea652638348ee3e83b818d559e2e0dd6",
+    "01_create_table.sql": "8f3d3fb1f4b53f25805413b2765a2d299bdf7609580a4f435278ea4848ea8cd0",
+    "02_insert_records.sql": "37d6431bec2eb393ca78976ab71a743713292f62eda7a6823e04461c321a6b1a",
+    "03_inspect_table.sql": "ed243c56ce8cfa47a57ab68eccb6d1e5eeab17a9f10693eea2f9f2262ad9ade2",
+    "04_verify_records.sql": "f80abc89ff5dfab2f8f6445e56556277d86e286823e930b90ac6c505ea373206"
+  },
+  "cases": [
+    {
+      "test": "Duplicate primary key",
+      "expected_error": 1062,
+      "observed_error": 1062,
+      "result": "PASS",
+      "server_message": "Duplicate entry '4535' for key 'creditcard.PRIMARY'"
+    },
+    {
+      "test": "Zero credit limit",
+      "expected_error": 3819,
+      "observed_error": 3819,
+      "result": "PASS",
+      "server_message": "Check constraint 'chk_credit_limit_positive' is violated."
+    },
+    {
+      "test": "Negative credit limit",
+      "expected_error": 3819,
+      "observed_error": 3819,
+      "result": "PASS",
+      "server_message": "Check constraint 'chk_credit_limit_positive' is violated."
+    },
+    {
+      "test": "Zero credit limit on UPDATE",
+      "expected_error": 3819,
+      "observed_error": 3819,
+      "result": "PASS",
+      "server_message": "Check constraint 'chk_credit_limit_positive' is violated."
+    },
+    {
+      "test": "NULL CreditcardNum",
+      "expected_error": 1048,
+      "observed_error": 1048,
+      "result": "PASS",
+      "server_message": "Column 'CreditcardNum' cannot be null"
+    },
+    {
+      "test": "NULL Creditcard_company",
+      "expected_error": 1048,
+      "observed_error": 1048,
+      "result": "PASS",
+      "server_message": "Column 'Creditcard_company' cannot be null"
+    },
+    {
+      "test": "NULL Creditcard_type",
+      "expected_error": 1048,
+      "observed_error": 1048,
+      "result": "PASS",
+      "server_message": "Column 'Creditcard_type' cannot be null"
+    },
+    {
+      "test": "NULL Credit_Limit",
+      "expected_error": 1048,
+      "observed_error": 1048,
+      "result": "PASS",
+      "server_message": "Column 'Credit_Limit' cannot be null"
+    },
+    {
+      "test": "NULL Totalspent",
+      "expected_error": 1048,
+      "observed_error": 1048,
+      "result": "PASS",
+      "server_message": "Column 'Totalspent' cannot be null"
+    },
+    {
+      "test": "NULL City",
+      "expected_error": 1048,
+      "observed_error": 1048,
+      "result": "PASS",
+      "server_message": "Column 'City' cannot be null"
+    },
+    {
+      "test": "NULL CardHolder",
+      "expected_error": 1048,
+      "observed_error": 1048,
+      "result": "PASS",
+      "server_message": "Column 'CardHolder' cannot be null"
+    },
+    {
+      "test": "NULL Issue_Date",
+      "expected_error": 1048,
+      "observed_error": 1048,
+      "result": "PASS",
+      "server_message": "Column 'Issue_Date' cannot be null"
+    },
+    {
+      "test": "Short practice identifier",
+      "expected_error": 3819,
+      "observed_error": 3819,
+      "result": "PASS",
+      "server_message": "Check constraint 'chk_practice_card_identifier' is violated."
+    },
+    {
+      "test": "Nonnumeric practice identifier",
+      "expected_error": 3819,
+      "observed_error": 3819,
+      "result": "PASS",
+      "server_message": "Check constraint 'chk_practice_card_identifier' is violated."
+    },
+    {
+      "test": "Identifier exceeds four characters",
+      "expected_error": 1406,
+      "observed_error": 1406,
+      "result": "PASS",
+      "server_message": "Data too long for column 'CreditcardNum' at row 1"
+    },
+    {
+      "test": "Too long Creditcard_company",
+      "expected_error": 1406,
+      "observed_error": 1406,
+      "result": "PASS",
+      "server_message": "Data too long for column 'Creditcard_company' at row 1"
+    },
+    {
+      "test": "Too long Creditcard_type",
+      "expected_error": 1406,
+      "observed_error": 1406,
+      "result": "PASS",
+      "server_message": "Data too long for column 'Creditcard_type' at row 1"
+    },
+    {
+      "test": "Too long City",
+      "expected_error": 1406,
+      "observed_error": 1406,
+      "result": "PASS",
+      "server_message": "Data too long for column 'City' at row 1"
+    },
+    {
+      "test": "Too long CardHolder",
+      "expected_error": 1406,
+      "observed_error": 1406,
+      "result": "PASS",
+      "server_message": "Data too long for column 'CardHolder' at row 1"
+    },
+    {
+      "test": "Invalid calendar date",
+      "expected_error": 1292,
+      "observed_error": 1292,
+      "result": "PASS",
+      "server_message": "Incorrect date value: '2021-02-30' for column 'Issue_Date' at row 1"
+    },
+    {
+      "test": "Nonnumeric credit limit",
+      "expected_error": 1366,
+      "observed_error": 1366,
+      "result": "PASS",
+      "server_message": "Incorrect decimal value: 'not-money' for column 'Credit_Limit' at row 1"
+    },
+    {
+      "test": "Credit limit exceeds DECIMAL capacity",
+      "expected_error": 1264,
+      "observed_error": 1264,
+      "result": "PASS",
+      "server_message": "Out of range value for column 'Credit_Limit' at row 1"
+    },
+    {
+      "test": "Positive minimum currency unit",
+      "expected_error": null,
+      "observed_error": null,
+      "result": "PASS",
+      "server_message": "Accepted; transaction rolled back"
+    },
+    {
+      "test": "Leading zero identifier",
+      "expected_error": null,
+      "observed_error": null,
+      "result": "PASS",
+      "server_message": "Accepted; transaction rolled back"
+    },
+    {
+      "test": "Repeated holder with a different identifier",
+      "expected_error": null,
+      "observed_error": null,
+      "result": "PASS",
+      "server_message": "Accepted; transaction rolled back"
+    },
+    {
+      "test": "Unicode holder name",
+      "expected_error": null,
+      "observed_error": null,
+      "result": "PASS",
+      "server_message": "Accepted; transaction rolled back"
+    },
+    {
+      "test": "No unrequested spending cap",
+      "expected_error": null,
+      "observed_error": null,
+      "result": "PASS",
+      "server_message": "Accepted; transaction rolled back"
+    },
+    {
+      "test": "Declared text and decimal boundaries",
+      "expected_error": null,
+      "observed_error": null,
+      "result": "PASS",
+      "server_message": "Accepted; transaction rolled back"
+    }
+  ]
+}
