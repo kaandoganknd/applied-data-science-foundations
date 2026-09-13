@@ -5,3 +5,7 @@ week-02-spss-data-quality-and-descriptive-statistics/data/Weather_Cleaned.csv
 week-02-spss-data-quality-and-descriptive-statistics/data/Iris_Modified.csv
 week-02-spss-data-quality-and-descriptive-statistics/data/weather.xlsx
 *.spv
+!week-03-spss-descriptive-correlation-regression/evidence/weather_analysis_output.spv
+week-03-spss-descriptive-correlation-regression/data/Salary_data.xlsx
+week-03-spss-descriptive-correlation-regression/data/House_prices.csv
+week-03-spss-descriptive-correlation-regression/data/weather.xlsx
