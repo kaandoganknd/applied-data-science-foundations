@@ -65,3 +65,5 @@ The saved results were executed on MySQL 9.7.1. All thirteen main-query comparis
 [MySQL Activities W8-W9.docx](<sources/MySQL Activities W8-W9.docx>) and [MySQL Activities W8- Solutions.docx](<sources/MySQL Activities W8- Solutions.docx>) are preserved unchanged. The first document contains 26 continuously numbered questions; the answer key separates four setup questions from thirteen Part 2 questions. The earlier portfolio stopped at original Q13; original Q14–17 have now been added to complete the answer-key scope. Original Q18–26 continue in [Week 10](../week-10-mysql-creditcard-aggregation/).
 
 The supplied W7 full solution remains the controlling schema/data source in the preceding project. The W6-named copy supplied later is byte-for-byte identical.
+
+The subsequently supplied W9-W10 solutions contain 26 Part 2 questions. Their first thirteen match this answer key; the [complete file and results](../week-10-mysql-creditcard-aggregation/) include the additional questions and document two differences from the earlier question sheet.

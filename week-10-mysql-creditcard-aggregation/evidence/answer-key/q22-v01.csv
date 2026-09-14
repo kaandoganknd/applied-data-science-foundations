@@ -1,0 +1,4 @@
+YEAR(Issue_Date),SUM(Credit_Limit - TotalSpent)
+2019,23184.20
+2020,49863.43
+2018,32987.16

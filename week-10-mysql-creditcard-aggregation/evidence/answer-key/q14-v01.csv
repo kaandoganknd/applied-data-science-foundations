@@ -1,0 +1,5 @@
+City,MIN(Credit_Limit),MAX(Credit_Limit),SUM(TotalSpent)
+London,1500.00,10000.00,11754.49
+Birmingham,3000.00,20000.00,8071.20
+Aberdeen,1200.00,50000.00,15213.52
+Glasgow,4000.00,24000.00,9626.00

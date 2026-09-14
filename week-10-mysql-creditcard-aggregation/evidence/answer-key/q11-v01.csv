@@ -1,0 +1,5 @@
+City,COUNT(CreditcardNum)
+London,5
+Birmingham,3
+Aberdeen,5
+Glasgow,2
