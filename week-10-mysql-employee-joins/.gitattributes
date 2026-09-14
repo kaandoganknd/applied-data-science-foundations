@@ -1,0 +1,4 @@
+"sources/EMPLOYEE_PROJECTS SCRIPT - FULL.txt" -text whitespace=cr-at-eol
+"sources/EMPLOYEE_DEPARTMENTS SCRIPT - FULL.txt" -text whitespace=cr-at-eol
+sql/setup_projects.sql -text whitespace=cr-at-eol
+sql/setup_departments.sql -text whitespace=cr-at-eol

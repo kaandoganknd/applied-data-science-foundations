@@ -1,0 +1,1685 @@
+{
+  "verified_at_utc": "2026-09-14T20:37:04.160297+00:00",
+  "mysql_version": "9.7.1",
+  "sql_mode": "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION",
+  "lower_case_table_names": 2,
+  "slide_count": 23,
+  "query_variants_checked": 45,
+  "constraint_cases_checked": 14,
+  "all_cells_match_independent_source_calculations": true,
+  "original_records_unchanged": true,
+  "source_warnings": [],
+  "table_counts": {
+    "employee_projects_db": {
+      "employee": 7,
+      "project": 6,
+      "works_on": 13
+    },
+    "employee_departments_db": {
+      "location": 5,
+      "department": 6,
+      "employee": 6
+    }
+  },
+  "foreign_keys": [
+    [
+      "employee_projects_db",
+      "works_on",
+      "enum",
+      "employee",
+      "enum"
+    ],
+    [
+      "employee_projects_db",
+      "works_on",
+      "pnum",
+      "project",
+      "pnum"
+    ],
+    [
+      "employee_departments_db",
+      "department",
+      "LocationID",
+      "location",
+      "LocationID"
+    ],
+    [
+      "employee_departments_db",
+      "employee",
+      "DeptID",
+      "department",
+      "DeptID"
+    ]
+  ],
+  "results": [
+    {
+      "id": "P01",
+      "title": "Floor-one roles: comma join (slides 7, 10 Mark 1)",
+      "sql": "SELECT ename, role\nFROM employee, works_on\nWHERE employee.enum = works_on.enum AND floor = 1;",
+      "columns": [
+        "ename",
+        "role"
+      ],
+      "rows": [
+        [
+          "Smith",
+          "Manager"
+        ],
+        [
+          "Smith",
+          "Designer"
+        ],
+        [
+          "Adams",
+          "Designer"
+        ],
+        [
+          "Adams",
+          "Manager"
+        ]
+      ],
+      "row_count": 4,
+      "check": "PASS"
+    },
+    {
+      "id": "P02",
+      "title": "Floor-one roles: INNER JOIN ON (slides 7, 10 Mark 2)",
+      "sql": "SELECT ename, role\nFROM employee\nINNER JOIN works_on ON employee.enum = works_on.enum\nWHERE floor = 1;",
+      "columns": [
+        "ename",
+        "role"
+      ],
+      "rows": [
+        [
+          "Smith",
+          "Manager"
+        ],
+        [
+          "Smith",
+          "Designer"
+        ],
+        [
+          "Adams",
+          "Designer"
+        ],
+        [
+          "Adams",
+          "Manager"
+        ]
+      ],
+      "row_count": 4,
+      "check": "PASS"
+    },
+    {
+      "id": "P03",
+      "title": "Floor-one roles: USING (slides 7, 10 Mark 3)",
+      "sql": "SELECT ename, role\nFROM employee\nINNER JOIN works_on USING(enum)\nWHERE floor = 1;",
+      "columns": [
+        "ename",
+        "role"
+      ],
+      "rows": [
+        [
+          "Smith",
+          "Manager"
+        ],
+        [
+          "Smith",
+          "Designer"
+        ],
+        [
+          "Adams",
+          "Designer"
+        ],
+        [
+          "Adams",
+          "Manager"
+        ]
+      ],
+      "row_count": 4,
+      "check": "PASS"
+    },
+    {
+      "id": "P04",
+      "title": "Floor-one roles: JOIN ON; missing slide 7 filter restored (slides 7, 10 Mark 4)",
+      "sql": "SELECT ename, role\nFROM employee\nJOIN works_on ON employee.enum = works_on.enum\nWHERE floor = 1;",
+      "columns": [
+        "ename",
+        "role"
+      ],
+      "rows": [
+        [
+          "Smith",
+          "Manager"
+        ],
+        [
+          "Smith",
+          "Designer"
+        ],
+        [
+          "Adams",
+          "Designer"
+        ],
+        [
+          "Adams",
+          "Manager"
+        ]
+      ],
+      "row_count": 4,
+      "check": "PASS"
+    },
+    {
+      "id": "P05",
+      "title": "Floor-one roles: aliases (slides 7, 10 Mark 5)",
+      "sql": "SELECT e.ename, w.role\nFROM employee e, works_on w\nWHERE e.enum = w.enum AND e.floor = 1;",
+      "columns": [
+        "ename",
+        "role"
+      ],
+      "rows": [
+        [
+          "Smith",
+          "Manager"
+        ],
+        [
+          "Smith",
+          "Designer"
+        ],
+        [
+          "Adams",
+          "Designer"
+        ],
+        [
+          "Adams",
+          "Manager"
+        ]
+      ],
+      "row_count": 4,
+      "check": "PASS"
+    },
+    {
+      "id": "P06",
+      "title": "Gates-led projects: comma join (slides 8, 9 Mark 1)",
+      "sql": "SELECT ename, salary\nFROM employee, works_on, project\nWHERE employee.enum = works_on.enum AND works_on.pnum = project.pnum AND leader = 'Gates';",
+      "columns": [
+        "ename",
+        "salary"
+      ],
+      "rows": [
+        [
+          "Smith",
+          "15000.00"
+        ],
+        [
+          "White",
+          "25100.00"
+        ],
+        [
+          "Doyle",
+          "11650.00"
+        ]
+      ],
+      "row_count": 3,
+      "check": "PASS"
+    },
+    {
+      "id": "P07",
+      "title": "Gates-led projects: INNER JOIN ON (slide 9 Mark 2)",
+      "sql": "SELECT ename, salary\nFROM employee\nINNER JOIN works_on ON employee.enum = works_on.enum\nINNER JOIN project ON works_on.pnum = project.pnum\nWHERE leader = 'Gates';",
+      "columns": [
+        "ename",
+        "salary"
+      ],
+      "rows": [
+        [
+          "Smith",
+          "15000.00"
+        ],
+        [
+          "White",
+          "25100.00"
+        ],
+        [
+          "Doyle",
+          "11650.00"
+        ]
+      ],
+      "row_count": 3,
+      "check": "PASS"
+    },
+    {
+      "id": "P08",
+      "title": "Gates-led projects: USING (slide 9 Mark 3)",
+      "sql": "SELECT ename, salary\nFROM employee\nINNER JOIN works_on USING(enum)\nINNER JOIN project USING(pnum)\nWHERE leader = 'Gates';",
+      "columns": [
+        "ename",
+        "salary"
+      ],
+      "rows": [
+        [
+          "Smith",
+          "15000.00"
+        ],
+        [
+          "White",
+          "25100.00"
+        ],
+        [
+          "Doyle",
+          "11650.00"
+        ]
+      ],
+      "row_count": 3,
+      "check": "PASS"
+    },
+    {
+      "id": "P09",
+      "title": "Gates-led projects: requested alias solution (slide 9 question)",
+      "sql": "SELECT e.ename, e.salary\nFROM employee e\nJOIN works_on w ON e.enum = w.enum\nJOIN project p ON w.pnum = p.pnum\nWHERE p.leader = 'Gates';",
+      "columns": [
+        "ename",
+        "salary"
+      ],
+      "rows": [
+        [
+          "Smith",
+          "15000.00"
+        ],
+        [
+          "White",
+          "25100.00"
+        ],
+        [
+          "Doyle",
+          "11650.00"
+        ]
+      ],
+      "row_count": 3,
+      "check": "PASS"
+    },
+    {
+      "id": "P10",
+      "title": "Consultant assignments: join retains duplicate names (slide 11)",
+      "sql": "SELECT ename\nFROM employee, works_on\nWHERE employee.enum = works_on.enum AND role = 'Consultant';",
+      "columns": [
+        "ename"
+      ],
+      "rows": [
+        [
+          "Jones"
+        ],
+        [
+          "Jones"
+        ],
+        [
+          "Doyle"
+        ]
+      ],
+      "row_count": 3,
+      "check": "PASS"
+    },
+    {
+      "id": "P11",
+      "title": "Consultant employees: IN returns one row per employee (slide 11)",
+      "sql": "SELECT ename\nFROM employee\nWHERE enum IN (SELECT enum\nFROM works_on\nWHERE role = 'Consultant');",
+      "columns": [
+        "ename"
+      ],
+      "rows": [
+        [
+          "Jones"
+        ],
+        [
+          "Doyle"
+        ]
+      ],
+      "row_count": 2,
+      "check": "PASS"
+    },
+    {
+      "id": "P12",
+      "title": "Consultant employees: DISTINCT join comparison (supporting check for slide 11)",
+      "sql": "SELECT DISTINCT e.ename\nFROM employee e\nJOIN works_on w ON e.enum = w.enum\nWHERE w.role = 'Consultant';",
+      "columns": [
+        "ename"
+      ],
+      "rows": [
+        [
+          "Jones"
+        ],
+        [
+          "Doyle"
+        ]
+      ],
+      "row_count": 2,
+      "check": "PASS"
+    },
+    {
+      "id": "P13",
+      "title": "Employees earning above the overall average (slide 12)",
+      "sql": "SELECT ename\nFROM employee\nWHERE salary > (SELECT AVG(salary)\nFROM employee);",
+      "columns": [
+        "ename"
+      ],
+      "rows": [
+        [
+          "White"
+        ],
+        [
+          "Adams"
+        ],
+        [
+          "Evans"
+        ]
+      ],
+      "row_count": 3,
+      "check": "PASS"
+    },
+    {
+      "id": "P14",
+      "title": "Projects with fewer than two assignments: source example (slide 12)",
+      "sql": "SELECT COUNT(pnum) AS Num_Projects\nFROM project\nWHERE pnum IN (SELECT pnum\nFROM works_on\nGROUP BY pnum\nHAVING COUNT(enum) < 2);",
+      "columns": [
+        "Num_Projects"
+      ],
+      "rows": [
+        [
+          2
+        ]
+      ],
+      "row_count": 1,
+      "check": "PASS"
+    },
+    {
+      "id": "P15",
+      "title": "Projects with fewer than two employees: includes zero-assignment projects",
+      "sql": "SELECT COUNT(*) AS Num_Projects\nFROM (SELECT p.pnum\nFROM project p\nLEFT JOIN works_on w ON p.pnum = w.pnum\nGROUP BY p.pnum\nHAVING COUNT(w.enum) < 2) AS low_staff_projects;",
+      "columns": [
+        "Num_Projects"
+      ],
+      "rows": [
+        [
+          2
+        ]
+      ],
+      "row_count": 1,
+      "check": "PASS"
+    },
+    {
+      "id": "P16",
+      "title": "Consultant project numbers: lowest nested step (slide 22)",
+      "sql": "SELECT pnum\nFROM works_on\nWHERE role = 'Consultant';",
+      "columns": [
+        "pnum"
+      ],
+      "rows": [
+        [
+          135
+        ],
+        [
+          147
+        ],
+        [
+          216
+        ]
+      ],
+      "row_count": 3,
+      "check": "PASS"
+    },
+    {
+      "id": "P17",
+      "title": "Assignments outside consultant projects: middle nested step (slide 22)",
+      "sql": "SELECT enum\nFROM works_on\nWHERE pnum NOT IN (SELECT pnum\nFROM works_on\nWHERE role = 'Consultant');",
+      "columns": [
+        "enum"
+      ],
+      "rows": [
+        [
+          852341
+        ],
+        [
+          852455
+        ],
+        [
+          852514
+        ],
+        [
+          852455
+        ],
+        [
+          852514
+        ]
+      ],
+      "row_count": 5,
+      "check": "PASS"
+    },
+    {
+      "id": "P18",
+      "title": "Employees on at least one consultant-free project: source result (slide 22)",
+      "sql": "SELECT DISTINCT ename\nFROM employee\nWHERE enum IN (SELECT enum\nFROM works_on\nWHERE pnum NOT IN (SELECT pnum\nFROM works_on\nWHERE role = 'Consultant'));",
+      "columns": [
+        "ename"
+      ],
+      "rows": [
+        [
+          "Smith"
+        ],
+        [
+          "White"
+        ],
+        [
+          "Doyle"
+        ]
+      ],
+      "row_count": 3,
+      "check": "PASS"
+    },
+    {
+      "id": "P19",
+      "title": "Employees on no consultant projects: strict reading of slide 22 question",
+      "sql": "SELECT e.ename\nFROM employee e\nWHERE NOT EXISTS (SELECT 1\nFROM works_on assigned\nJOIN works_on consultant ON assigned.pnum = consultant.pnum\nWHERE assigned.enum = e.enum AND consultant.role = 'Consultant');",
+      "columns": [
+        "ename"
+      ],
+      "rows": [
+        [
+          "White"
+        ]
+      ],
+      "row_count": 1,
+      "check": "PASS"
+    },
+    {
+      "id": "P20",
+      "title": "Read the floor-one view (slide 23)",
+      "sql": "SELECT employee_no, name\nFROM floor_1_emp ORDER BY employee_no;",
+      "columns": [
+        "employee_no",
+        "name"
+      ],
+      "rows": [
+        [
+          852341,
+          "Smith"
+        ],
+        [
+          852491,
+          "Adams"
+        ]
+      ],
+      "row_count": 2,
+      "check": "PASS"
+    },
+    {
+      "id": "D01",
+      "title": "Cartesian product: all employee-department pairs (slide 15)",
+      "sql": "SELECT e.LastName, d.DeptName\nFROM employee e, department d;",
+      "columns": [
+        "LastName",
+        "DeptName"
+      ],
+      "rows": [
+        [
+          "Klopp",
+          "Department of Resources"
+        ],
+        [
+          "Klopp",
+          "Department of Sales"
+        ],
+        [
+          "Klopp",
+          "Department of Marketing"
+        ],
+        [
+          "Klopp",
+          "Department of Business"
+        ],
+        [
+          "Klopp",
+          "Department of Mathematics"
+        ],
+        [
+          "Klopp",
+          "Department of Computing"
+        ],
+        [
+          "Alicia",
+          "Department of Resources"
+        ],
+        [
+          "Alicia",
+          "Department of Sales"
+        ],
+        [
+          "Alicia",
+          "Department of Marketing"
+        ],
+        [
+          "Alicia",
+          "Department of Business"
+        ],
+        [
+          "Alicia",
+          "Department of Mathematics"
+        ],
+        [
+          "Alicia",
+          "Department of Computing"
+        ],
+        [
+          "Thompson",
+          "Department of Resources"
+        ],
+        [
+          "Thompson",
+          "Department of Sales"
+        ],
+        [
+          "Thompson",
+          "Department of Marketing"
+        ],
+        [
+          "Thompson",
+          "Department of Business"
+        ],
+        [
+          "Thompson",
+          "Department of Mathematics"
+        ],
+        [
+          "Thompson",
+          "Department of Computing"
+        ],
+        [
+          "Jones",
+          "Department of Resources"
+        ],
+        [
+          "Jones",
+          "Department of Sales"
+        ],
+        [
+          "Jones",
+          "Department of Marketing"
+        ],
+        [
+          "Jones",
+          "Department of Business"
+        ],
+        [
+          "Jones",
+          "Department of Mathematics"
+        ],
+        [
+          "Jones",
+          "Department of Computing"
+        ],
+        [
+          "Mullins",
+          "Department of Resources"
+        ],
+        [
+          "Mullins",
+          "Department of Sales"
+        ],
+        [
+          "Mullins",
+          "Department of Marketing"
+        ],
+        [
+          "Mullins",
+          "Department of Business"
+        ],
+        [
+          "Mullins",
+          "Department of Mathematics"
+        ],
+        [
+          "Mullins",
+          "Department of Computing"
+        ],
+        [
+          "Frank",
+          "Department of Resources"
+        ],
+        [
+          "Frank",
+          "Department of Sales"
+        ],
+        [
+          "Frank",
+          "Department of Marketing"
+        ],
+        [
+          "Frank",
+          "Department of Business"
+        ],
+        [
+          "Frank",
+          "Department of Mathematics"
+        ],
+        [
+          "Frank",
+          "Department of Computing"
+        ]
+      ],
+      "row_count": 36,
+      "check": "PASS"
+    },
+    {
+      "id": "D02",
+      "title": "Employee departments: table-qualified comma join (slide 15 Mark 1)",
+      "sql": "SELECT employee.LastName, department.DeptName\nFROM employee, department\nWHERE employee.DeptID = department.DeptID;",
+      "columns": [
+        "LastName",
+        "DeptName"
+      ],
+      "rows": [
+        [
+          "Klopp",
+          "Department of Business"
+        ],
+        [
+          "Alicia",
+          "Department of Computing"
+        ],
+        [
+          "Thompson",
+          "Department of Business"
+        ],
+        [
+          "Jones",
+          "Department of Mathematics"
+        ],
+        [
+          "Mullins",
+          "Department of Marketing"
+        ],
+        [
+          "Frank",
+          "Department of Sales"
+        ]
+      ],
+      "row_count": 6,
+      "check": "PASS"
+    },
+    {
+      "id": "D03",
+      "title": "Employee departments: defined aliases (slide 15 Mark 2 corrected)",
+      "sql": "SELECT e.LastName, d.DeptName\nFROM employee e, department d\nWHERE e.DeptID = d.DeptID;",
+      "columns": [
+        "LastName",
+        "DeptName"
+      ],
+      "rows": [
+        [
+          "Klopp",
+          "Department of Business"
+        ],
+        [
+          "Alicia",
+          "Department of Computing"
+        ],
+        [
+          "Thompson",
+          "Department of Business"
+        ],
+        [
+          "Jones",
+          "Department of Mathematics"
+        ],
+        [
+          "Mullins",
+          "Department of Marketing"
+        ],
+        [
+          "Frank",
+          "Department of Sales"
+        ]
+      ],
+      "row_count": 6,
+      "check": "PASS"
+    },
+    {
+      "id": "D04",
+      "title": "Employee departments: JOIN with WHERE (slide 15 Mark 3)",
+      "sql": "SELECT e.LastName, d.DeptName\nFROM employee e\nJOIN department d\nWHERE e.DeptID = d.DeptID;",
+      "columns": [
+        "LastName",
+        "DeptName"
+      ],
+      "rows": [
+        [
+          "Klopp",
+          "Department of Business"
+        ],
+        [
+          "Alicia",
+          "Department of Computing"
+        ],
+        [
+          "Thompson",
+          "Department of Business"
+        ],
+        [
+          "Jones",
+          "Department of Mathematics"
+        ],
+        [
+          "Mullins",
+          "Department of Marketing"
+        ],
+        [
+          "Frank",
+          "Department of Sales"
+        ]
+      ],
+      "row_count": 6,
+      "check": "PASS"
+    },
+    {
+      "id": "D05",
+      "title": "Employee departments: INNER JOIN with WHERE (slide 15 Mark 4)",
+      "sql": "SELECT e.LastName, d.DeptName\nFROM employee e\nINNER JOIN department d\nWHERE e.DeptID = d.DeptID;",
+      "columns": [
+        "LastName",
+        "DeptName"
+      ],
+      "rows": [
+        [
+          "Klopp",
+          "Department of Business"
+        ],
+        [
+          "Alicia",
+          "Department of Computing"
+        ],
+        [
+          "Thompson",
+          "Department of Business"
+        ],
+        [
+          "Jones",
+          "Department of Mathematics"
+        ],
+        [
+          "Mullins",
+          "Department of Marketing"
+        ],
+        [
+          "Frank",
+          "Department of Sales"
+        ]
+      ],
+      "row_count": 6,
+      "check": "PASS"
+    },
+    {
+      "id": "D06",
+      "title": "Employee departments: INNER JOIN ON (slide 15 Mark 5)",
+      "sql": "SELECT e.LastName, d.DeptName\nFROM employee e\nINNER JOIN department d ON e.DeptID = d.DeptID;",
+      "columns": [
+        "LastName",
+        "DeptName"
+      ],
+      "rows": [
+        [
+          "Klopp",
+          "Department of Business"
+        ],
+        [
+          "Alicia",
+          "Department of Computing"
+        ],
+        [
+          "Thompson",
+          "Department of Business"
+        ],
+        [
+          "Jones",
+          "Department of Mathematics"
+        ],
+        [
+          "Mullins",
+          "Department of Marketing"
+        ],
+        [
+          "Frank",
+          "Department of Sales"
+        ]
+      ],
+      "row_count": 6,
+      "check": "PASS"
+    },
+    {
+      "id": "D07",
+      "title": "Employee departments: USING (slide 15 Mark 6)",
+      "sql": "SELECT e.LastName, d.DeptName\nFROM employee e\nINNER JOIN department d USING(DeptID);",
+      "columns": [
+        "LastName",
+        "DeptName"
+      ],
+      "rows": [
+        [
+          "Klopp",
+          "Department of Business"
+        ],
+        [
+          "Alicia",
+          "Department of Computing"
+        ],
+        [
+          "Thompson",
+          "Department of Business"
+        ],
+        [
+          "Jones",
+          "Department of Mathematics"
+        ],
+        [
+          "Mullins",
+          "Department of Marketing"
+        ],
+        [
+          "Frank",
+          "Department of Sales"
+        ]
+      ],
+      "row_count": 6,
+      "check": "PASS"
+    },
+    {
+      "id": "D08",
+      "title": "Employee departments and city: comma join (slide 16 Mark 1)",
+      "sql": "SELECT employee.LastName, department.DeptName, location.City\nFROM employee, department, location\nWHERE employee.DeptID = department.DeptID AND location.LocationID = department.LocationID;",
+      "columns": [
+        "LastName",
+        "DeptName",
+        "City"
+      ],
+      "rows": [
+        [
+          "Klopp",
+          "Department of Business",
+          "Birmingham"
+        ],
+        [
+          "Alicia",
+          "Department of Computing",
+          "Birmingham"
+        ],
+        [
+          "Thompson",
+          "Department of Business",
+          "Birmingham"
+        ],
+        [
+          "Jones",
+          "Department of Mathematics",
+          "Liverpool"
+        ],
+        [
+          "Mullins",
+          "Department of Marketing",
+          "London"
+        ],
+        [
+          "Frank",
+          "Department of Sales",
+          "London"
+        ]
+      ],
+      "row_count": 6,
+      "check": "PASS"
+    },
+    {
+      "id": "D09",
+      "title": "Employee departments and city: aliases (slide 16 Mark 2)",
+      "sql": "SELECT e.LastName, d.DeptName, l.City\nFROM employee e, department d, location l\nWHERE e.DeptID = d.DeptID AND l.LocationID = d.LocationID;",
+      "columns": [
+        "LastName",
+        "DeptName",
+        "City"
+      ],
+      "rows": [
+        [
+          "Klopp",
+          "Department of Business",
+          "Birmingham"
+        ],
+        [
+          "Alicia",
+          "Department of Computing",
+          "Birmingham"
+        ],
+        [
+          "Thompson",
+          "Department of Business",
+          "Birmingham"
+        ],
+        [
+          "Jones",
+          "Department of Mathematics",
+          "Liverpool"
+        ],
+        [
+          "Mullins",
+          "Department of Marketing",
+          "London"
+        ],
+        [
+          "Frank",
+          "Department of Sales",
+          "London"
+        ]
+      ],
+      "row_count": 6,
+      "check": "PASS"
+    },
+    {
+      "id": "D10",
+      "title": "Employee departments and city: JOIN with WHERE (slide 16 Mark 3)",
+      "sql": "SELECT e.LastName, d.DeptName, l.City\nFROM employee e\nJOIN department d\nJOIN location l\nWHERE e.DeptID = d.DeptID AND l.LocationID = d.LocationID;",
+      "columns": [
+        "LastName",
+        "DeptName",
+        "City"
+      ],
+      "rows": [
+        [
+          "Klopp",
+          "Department of Business",
+          "Birmingham"
+        ],
+        [
+          "Alicia",
+          "Department of Computing",
+          "Birmingham"
+        ],
+        [
+          "Thompson",
+          "Department of Business",
+          "Birmingham"
+        ],
+        [
+          "Jones",
+          "Department of Mathematics",
+          "Liverpool"
+        ],
+        [
+          "Mullins",
+          "Department of Marketing",
+          "London"
+        ],
+        [
+          "Frank",
+          "Department of Sales",
+          "London"
+        ]
+      ],
+      "row_count": 6,
+      "check": "PASS"
+    },
+    {
+      "id": "D11",
+      "title": "Employee departments and city: missing City restored (slide 16 Mark 4)",
+      "sql": "SELECT e.LastName, d.DeptName, l.City\nFROM employee e\nINNER JOIN department d\nINNER JOIN location l\nWHERE e.DeptID = d.DeptID AND l.LocationID = d.LocationID;",
+      "columns": [
+        "LastName",
+        "DeptName",
+        "City"
+      ],
+      "rows": [
+        [
+          "Klopp",
+          "Department of Business",
+          "Birmingham"
+        ],
+        [
+          "Alicia",
+          "Department of Computing",
+          "Birmingham"
+        ],
+        [
+          "Thompson",
+          "Department of Business",
+          "Birmingham"
+        ],
+        [
+          "Jones",
+          "Department of Mathematics",
+          "Liverpool"
+        ],
+        [
+          "Mullins",
+          "Department of Marketing",
+          "London"
+        ],
+        [
+          "Frank",
+          "Department of Sales",
+          "London"
+        ]
+      ],
+      "row_count": 6,
+      "check": "PASS"
+    },
+    {
+      "id": "D12",
+      "title": "Employee departments and city: corrected ON equality and City (slide 16 Mark 5)",
+      "sql": "SELECT e.LastName, d.DeptName, l.City\nFROM employee e\nINNER JOIN department d ON e.DeptID = d.DeptID\nINNER JOIN location l ON d.LocationID = l.LocationID;",
+      "columns": [
+        "LastName",
+        "DeptName",
+        "City"
+      ],
+      "rows": [
+        [
+          "Klopp",
+          "Department of Business",
+          "Birmingham"
+        ],
+        [
+          "Alicia",
+          "Department of Computing",
+          "Birmingham"
+        ],
+        [
+          "Thompson",
+          "Department of Business",
+          "Birmingham"
+        ],
+        [
+          "Jones",
+          "Department of Mathematics",
+          "Liverpool"
+        ],
+        [
+          "Mullins",
+          "Department of Marketing",
+          "London"
+        ],
+        [
+          "Frank",
+          "Department of Sales",
+          "London"
+        ]
+      ],
+      "row_count": 6,
+      "check": "PASS"
+    },
+    {
+      "id": "D13",
+      "title": "Employee departments and city: USING with City restored (slide 16 Mark 6)",
+      "sql": "SELECT e.LastName, d.DeptName, l.City\nFROM employee e\nINNER JOIN department d USING(DeptID)\nINNER JOIN location l USING(LocationID);",
+      "columns": [
+        "LastName",
+        "DeptName",
+        "City"
+      ],
+      "rows": [
+        [
+          "Klopp",
+          "Department of Business",
+          "Birmingham"
+        ],
+        [
+          "Alicia",
+          "Department of Computing",
+          "Birmingham"
+        ],
+        [
+          "Thompson",
+          "Department of Business",
+          "Birmingham"
+        ],
+        [
+          "Jones",
+          "Department of Mathematics",
+          "Liverpool"
+        ],
+        [
+          "Mullins",
+          "Department of Marketing",
+          "London"
+        ],
+        [
+          "Frank",
+          "Department of Sales",
+          "London"
+        ]
+      ],
+      "row_count": 6,
+      "check": "PASS"
+    },
+    {
+      "id": "D14",
+      "title": "Salary above 34000: ON joins (slide 17 Mark 1)",
+      "sql": "SELECT e.LastName, d.DeptName, l.City\nFROM employee e\nINNER JOIN department d ON e.DeptID = d.DeptID\nINNER JOIN location l ON l.LocationID = d.LocationID\nWHERE e.Salary > 34000;",
+      "columns": [
+        "LastName",
+        "DeptName",
+        "City"
+      ],
+      "rows": [
+        [
+          "Klopp",
+          "Department of Business",
+          "Birmingham"
+        ],
+        [
+          "Alicia",
+          "Department of Computing",
+          "Birmingham"
+        ],
+        [
+          "Jones",
+          "Department of Mathematics",
+          "Liverpool"
+        ]
+      ],
+      "row_count": 3,
+      "check": "PASS"
+    },
+    {
+      "id": "D15",
+      "title": "Salary above 34000: USING joins (slide 17 Mark 6)",
+      "sql": "SELECT e.LastName, d.DeptName, l.City\nFROM employee e\nINNER JOIN department d USING(DeptID)\nINNER JOIN location l USING(LocationID)\nWHERE e.Salary > 34000;",
+      "columns": [
+        "LastName",
+        "DeptName",
+        "City"
+      ],
+      "rows": [
+        [
+          "Klopp",
+          "Department of Business",
+          "Birmingham"
+        ],
+        [
+          "Alicia",
+          "Department of Computing",
+          "Birmingham"
+        ],
+        [
+          "Jones",
+          "Department of Mathematics",
+          "Liverpool"
+        ]
+      ],
+      "row_count": 3,
+      "check": "PASS"
+    },
+    {
+      "id": "D16",
+      "title": "Salary above 34000: comma joins (slide 17 Mark 2)",
+      "sql": "SELECT e.LastName, d.DeptName, l.City\nFROM employee e, department d, location l\nWHERE e.DeptID = d.DeptID AND l.LocationID = d.LocationID AND e.Salary > 34000;",
+      "columns": [
+        "LastName",
+        "DeptName",
+        "City"
+      ],
+      "rows": [
+        [
+          "Klopp",
+          "Department of Business",
+          "Birmingham"
+        ],
+        [
+          "Alicia",
+          "Department of Computing",
+          "Birmingham"
+        ],
+        [
+          "Jones",
+          "Department of Mathematics",
+          "Liverpool"
+        ]
+      ],
+      "row_count": 3,
+      "check": "PASS"
+    },
+    {
+      "id": "D17",
+      "title": "Salary above 34000: INNER JOIN with WHERE (slide 17 Mark 4)",
+      "sql": "SELECT e.LastName, d.DeptName, l.City\nFROM employee e\nINNER JOIN department d\nINNER JOIN location l\nWHERE e.DeptID = d.DeptID AND l.LocationID = d.LocationID AND e.Salary > 34000;",
+      "columns": [
+        "LastName",
+        "DeptName",
+        "City"
+      ],
+      "rows": [
+        [
+          "Klopp",
+          "Department of Business",
+          "Birmingham"
+        ],
+        [
+          "Alicia",
+          "Department of Computing",
+          "Birmingham"
+        ],
+        [
+          "Jones",
+          "Department of Mathematics",
+          "Liverpool"
+        ]
+      ],
+      "row_count": 3,
+      "check": "PASS"
+    },
+    {
+      "id": "D18",
+      "title": "Left join: ON (slide 18)",
+      "sql": "SELECT e.LastName, d.DeptName\nFROM employee e\nLEFT JOIN department d ON e.DeptID = d.DeptID;",
+      "columns": [
+        "LastName",
+        "DeptName"
+      ],
+      "rows": [
+        [
+          "Klopp",
+          "Department of Business"
+        ],
+        [
+          "Alicia",
+          "Department of Computing"
+        ],
+        [
+          "Thompson",
+          "Department of Business"
+        ],
+        [
+          "Jones",
+          "Department of Mathematics"
+        ],
+        [
+          "Mullins",
+          "Department of Marketing"
+        ],
+        [
+          "Frank",
+          "Department of Sales"
+        ]
+      ],
+      "row_count": 6,
+      "check": "PASS"
+    },
+    {
+      "id": "D19",
+      "title": "Left outer join: ON (slide 18)",
+      "sql": "SELECT e.LastName, d.DeptName\nFROM employee e\nLEFT OUTER JOIN department d ON e.DeptID = d.DeptID;",
+      "columns": [
+        "LastName",
+        "DeptName"
+      ],
+      "rows": [
+        [
+          "Klopp",
+          "Department of Business"
+        ],
+        [
+          "Alicia",
+          "Department of Computing"
+        ],
+        [
+          "Thompson",
+          "Department of Business"
+        ],
+        [
+          "Jones",
+          "Department of Mathematics"
+        ],
+        [
+          "Mullins",
+          "Department of Marketing"
+        ],
+        [
+          "Frank",
+          "Department of Sales"
+        ]
+      ],
+      "row_count": 6,
+      "check": "PASS"
+    },
+    {
+      "id": "D20",
+      "title": "Left outer join: USING (slide 18)",
+      "sql": "SELECT e.LastName, d.DeptName\nFROM employee e\nLEFT OUTER JOIN department d USING(DeptID);",
+      "columns": [
+        "LastName",
+        "DeptName"
+      ],
+      "rows": [
+        [
+          "Klopp",
+          "Department of Business"
+        ],
+        [
+          "Alicia",
+          "Department of Computing"
+        ],
+        [
+          "Thompson",
+          "Department of Business"
+        ],
+        [
+          "Jones",
+          "Department of Mathematics"
+        ],
+        [
+          "Mullins",
+          "Department of Marketing"
+        ],
+        [
+          "Frank",
+          "Department of Sales"
+        ]
+      ],
+      "row_count": 6,
+      "check": "PASS"
+    },
+    {
+      "id": "D21",
+      "title": "Right join: ON (slide 19)",
+      "sql": "SELECT e.LastName, d.DeptName\nFROM employee e\nRIGHT JOIN department d ON e.DeptID = d.DeptID;",
+      "columns": [
+        "LastName",
+        "DeptName"
+      ],
+      "rows": [
+        [
+          "Alicia",
+          "Department of Computing"
+        ],
+        [
+          "Jones",
+          "Department of Mathematics"
+        ],
+        [
+          "Klopp",
+          "Department of Business"
+        ],
+        [
+          "Thompson",
+          "Department of Business"
+        ],
+        [
+          "Mullins",
+          "Department of Marketing"
+        ],
+        [
+          "Frank",
+          "Department of Sales"
+        ],
+        [
+          null,
+          "Department of Resources"
+        ]
+      ],
+      "row_count": 7,
+      "check": "PASS"
+    },
+    {
+      "id": "D22",
+      "title": "Right outer join: ON (slide 19)",
+      "sql": "SELECT e.LastName, d.DeptName\nFROM employee e\nRIGHT OUTER JOIN department d ON e.DeptID = d.DeptID;",
+      "columns": [
+        "LastName",
+        "DeptName"
+      ],
+      "rows": [
+        [
+          "Alicia",
+          "Department of Computing"
+        ],
+        [
+          "Jones",
+          "Department of Mathematics"
+        ],
+        [
+          "Klopp",
+          "Department of Business"
+        ],
+        [
+          "Thompson",
+          "Department of Business"
+        ],
+        [
+          "Mullins",
+          "Department of Marketing"
+        ],
+        [
+          "Frank",
+          "Department of Sales"
+        ],
+        [
+          null,
+          "Department of Resources"
+        ]
+      ],
+      "row_count": 7,
+      "check": "PASS"
+    },
+    {
+      "id": "D23",
+      "title": "Right outer join: USING (slide 19)",
+      "sql": "SELECT e.LastName, d.DeptName\nFROM employee e\nRIGHT OUTER JOIN department d USING(DeptID);",
+      "columns": [
+        "LastName",
+        "DeptName"
+      ],
+      "rows": [
+        [
+          "Alicia",
+          "Department of Computing"
+        ],
+        [
+          "Jones",
+          "Department of Mathematics"
+        ],
+        [
+          "Klopp",
+          "Department of Business"
+        ],
+        [
+          "Thompson",
+          "Department of Business"
+        ],
+        [
+          "Mullins",
+          "Department of Marketing"
+        ],
+        [
+          "Frank",
+          "Department of Sales"
+        ],
+        [
+          null,
+          "Department of Resources"
+        ]
+      ],
+      "row_count": 7,
+      "check": "PASS"
+    },
+    {
+      "id": "D24",
+      "title": "Full outer join emulation: UNION source example (slide 20)",
+      "sql": "SELECT e.LastName, d.DeptName\nFROM employee e\nLEFT JOIN department d USING(DeptID)\nUNION\nSELECT e.LastName, d.DeptName\nFROM employee e\nRIGHT JOIN department d USING(DeptID);",
+      "columns": [
+        "LastName",
+        "DeptName"
+      ],
+      "rows": [
+        [
+          "Klopp",
+          "Department of Business"
+        ],
+        [
+          "Alicia",
+          "Department of Computing"
+        ],
+        [
+          "Thompson",
+          "Department of Business"
+        ],
+        [
+          "Jones",
+          "Department of Mathematics"
+        ],
+        [
+          "Mullins",
+          "Department of Marketing"
+        ],
+        [
+          "Frank",
+          "Department of Sales"
+        ],
+        [
+          null,
+          "Department of Resources"
+        ]
+      ],
+      "row_count": 7,
+      "check": "PASS"
+    },
+    {
+      "id": "D25",
+      "title": "Full outer join emulation: UNION ALL plus unmatched right rows",
+      "sql": "SELECT e.LastName, d.DeptName\nFROM employee e\nLEFT JOIN department d ON e.DeptID = d.DeptID\nUNION ALL\nSELECT e.LastName, d.DeptName\nFROM employee e\nRIGHT JOIN department d ON e.DeptID = d.DeptID\nWHERE e.EmployeeID IS NULL;",
+      "columns": [
+        "LastName",
+        "DeptName"
+      ],
+      "rows": [
+        [
+          "Klopp",
+          "Department of Business"
+        ],
+        [
+          "Alicia",
+          "Department of Computing"
+        ],
+        [
+          "Thompson",
+          "Department of Business"
+        ],
+        [
+          "Jones",
+          "Department of Mathematics"
+        ],
+        [
+          "Mullins",
+          "Department of Marketing"
+        ],
+        [
+          "Frank",
+          "Department of Sales"
+        ],
+        [
+          null,
+          "Department of Resources"
+        ]
+      ],
+      "row_count": 7,
+      "check": "PASS"
+    }
+  ],
+  "constraints": [
+    {
+      "test": "Duplicate employee primary key",
+      "expected_error": 1062,
+      "observed_error": 1062,
+      "result": "PASS"
+    },
+    {
+      "test": "Duplicate assignment composite key",
+      "expected_error": 1062,
+      "observed_error": 1062,
+      "result": "PASS"
+    },
+    {
+      "test": "Unknown assignment employee",
+      "expected_error": 1452,
+      "observed_error": 1452,
+      "result": "PASS"
+    },
+    {
+      "test": "Unknown assignment project",
+      "expected_error": 1452,
+      "observed_error": 1452,
+      "result": "PASS"
+    },
+    {
+      "test": "NULL assignment key",
+      "expected_error": 1048,
+      "observed_error": 1048,
+      "result": "PASS"
+    },
+    {
+      "test": "Salary must be positive",
+      "expected_error": 3819,
+      "observed_error": 3819,
+      "result": "PASS"
+    },
+    {
+      "test": "Start date lower bound",
+      "expected_error": 3819,
+      "observed_error": 3819,
+      "result": "PASS"
+    },
+    {
+      "test": "Required employee name",
+      "expected_error": 1048,
+      "observed_error": 1048,
+      "result": "PASS"
+    },
+    {
+      "test": "Salary decimal capacity",
+      "expected_error": 1264,
+      "observed_error": 1264,
+      "result": "PASS"
+    },
+    {
+      "test": "Nullable start date and salary retained",
+      "expected_error": null,
+      "observed_error": null,
+      "result": "PASS"
+    },
+    {
+      "test": "Department requires a valid location when present",
+      "expected_error": 1452,
+      "observed_error": 1452,
+      "result": "PASS"
+    },
+    {
+      "test": "Employee requires a valid department when present",
+      "expected_error": 1452,
+      "observed_error": 1452,
+      "result": "PASS"
+    },
+    {
+      "test": "Duplicate department employee primary key",
+      "expected_error": 1062,
+      "observed_error": 1062,
+      "result": "PASS"
+    },
+    {
+      "test": "Nullable employee department retained",
+      "expected_error": null,
+      "observed_error": null,
+      "result": "PASS"
+    }
+  ],
+  "input_sha256": {
+    "sources/EMPLOYEE_DEPARTMENTS SCRIPT - FULL.txt": "667c02ec19ca55004c5c60e590886eb198bc419c5fb48d1b08157b82f3cf9396",
+    "sources/EMPLOYEE_PROJECTS SCRIPT - FULL.txt": "d7b39b5ac0c07be330752d6c6ebf5bd61821506b5a87d4ba367d69a5ba4386e0",
+    "sources/MySQL Exercises.pptx": "7f254b9831eaafbb0ae81d36b6b993cf581cfb8bb0d64fa5e1353ac5a46447b3",
+    "sql/create_floor_view.sql": "d433fcc4990f167804a9e0575a72494730a2462c394b7b58e8bc11d8d2bda269",
+    "sql/departments_queries.sql": "952f23ddbbfcb2ac57cce19be58e8331e7e95d54a0280bc0330984dee545be3e",
+    "sql/projects_queries.sql": "ff66c8d7580f21fa9cf6f348ca0a9fdbae173e92e03d61fee2a292127bf4e539",
+    "sql/setup_departments.sql": "667c02ec19ca55004c5c60e590886eb198bc419c5fb48d1b08157b82f3cf9396",
+    "sql/setup_projects.sql": "d7b39b5ac0c07be330752d6c6ebf5bd61821506b5a87d4ba367d69a5ba4386e0"
+  }
+}

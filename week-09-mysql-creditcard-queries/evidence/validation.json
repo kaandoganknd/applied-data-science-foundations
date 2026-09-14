@@ -1,5 +1,5 @@
 {
-  "verified_at_utc": "2026-09-13T17:06:00.247886+00:00",
+  "verified_at_utc": "2026-09-14T20:33:06.704539+00:00",
   "mysql_version": "9.7.1",
   "lower_case_table_names": 2,
   "sql_mode": "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION",
@@ -19,7 +19,11 @@
     10,
     11,
     12,
-    13
+    13,
+    14,
+    15,
+    16,
+    17
   ],
   "newly_executed_questions": [
     5,
@@ -30,9 +34,29 @@
     10,
     11,
     12,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "answer_key_part2_questions": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
     13
   ],
-  "passed_query_checks": 9,
+  "answer_key_variants_checked": 16,
+  "passed_query_checks": 13,
   "failed_query_checks": 0,
   "comparison": "Every result cell compared with independent Python calculations on the reference INSERT CSV",
   "schema_matches_reference": true,
@@ -41,7 +65,10 @@
   "transaction_read_only": true,
   "input_sha256": {
     "week-09-mysql-creditcard-queries/sources/MySQL Activities W8-W9.docx": "adc9e0b87be2e30f39b0e2d3f222129d30ebbb7864531b0a02a3391a5a46286a",
+    "week-09-mysql-creditcard-queries/sources/MySQL Activities W8- Solutions.docx": "1df7a90a442036cea3f4a757fa680243e27120e1a0e06c982f700bd15a046ca3",
     "week-09-mysql-creditcard-queries/sql/questions_05_to_13.sql": "2a3bf9535bea1601820af93c2413562f0caf24d074413a598bf392ef9da7e299",
+    "week-09-mysql-creditcard-queries/sql/questions_14_to_17.sql": "11e55c4bc40d4f591067665dd7b9ec70c7350060ed6c246a636e54102f4075dd",
+    "week-09-mysql-creditcard-queries/sql/answer_key_part2.sql": "310eb35fafe24da853c357e4af5c60f9791309c0d076b240005561740e533ef0",
     "week-08-mysql-creditcard/data/creditcard_insert.csv": "7fb09605cee6b0ce54c90b1191ba4db9e8c2bba353f958f89fa3879b8a1b04c0",
     "week-08-mysql-creditcard/sql/full_solution.sql": "5ca38881ae8c529d0a263b61f335a4570bdd32951a0c9da268751de664c86f79",
     "week-08-mysql-creditcard/evidence/show-create-table.sql": "67de5a2c85cdebdd0d0935896d45c089d5b8207fb9b93b3b45c7b7d1bf4c3b6c"
@@ -595,6 +622,596 @@
         ]
       ],
       "row_count": 10,
+      "check": "PASS"
+    },
+    {
+      "question": 14,
+      "title": "Number of Mastercard cards (answer-key Part 2 Q10).",
+      "sql": "SELECT Creditcard_type, COUNT(*) AS card_count\nFROM creditcard\nWHERE Creditcard_type = 'Mastercard'\nGROUP BY Creditcard_type;",
+      "columns": [
+        "Creditcard_type",
+        "card_count"
+      ],
+      "rows": [
+        [
+          "Mastercard",
+          8
+        ]
+      ],
+      "row_count": 1,
+      "check": "PASS"
+    },
+    {
+      "question": 15,
+      "title": "Number of cards in each city (answer-key Part 2 Q11).",
+      "sql": "SELECT City, COUNT(*) AS card_count\nFROM creditcard\nGROUP BY City\nORDER BY City;",
+      "columns": [
+        "City",
+        "card_count"
+      ],
+      "rows": [
+        [
+          "Aberdeen",
+          5
+        ],
+        [
+          "Birmingham",
+          3
+        ],
+        [
+          "Glasgow",
+          2
+        ],
+        [
+          "London",
+          5
+        ]
+      ],
+      "row_count": 4,
+      "check": "PASS"
+    },
+    {
+      "question": 16,
+      "title": "Number of cards held by each cardholder (answer-key Part 2 Q12).",
+      "sql": "SELECT CardHolder, COUNT(*) AS card_count\nFROM creditcard\nGROUP BY CardHolder\nORDER BY CardHolder;",
+      "columns": [
+        "CardHolder",
+        "card_count"
+      ],
+      "rows": [
+        [
+          "John Mackay",
+          2
+        ],
+        [
+          "John Smith",
+          1
+        ],
+        [
+          "Julia Kathy",
+          3
+        ],
+        [
+          "Krystal Jones",
+          1
+        ],
+        [
+          "Mario Brothers",
+          2
+        ],
+        [
+          "Paul Carter",
+          2
+        ],
+        [
+          "Paul Jones",
+          3
+        ],
+        [
+          "Stanley Mathews",
+          1
+        ]
+      ],
+      "row_count": 8,
+      "check": "PASS"
+    },
+    {
+      "question": 17,
+      "title": "Minimum and maximum credit limits by city (answer-key Part 2 Q13).",
+      "sql": "SELECT City, MIN(Credit_Limit) AS minimum_credit_limit,\n       MAX(Credit_Limit) AS maximum_credit_limit\nFROM creditcard\nGROUP BY City\nORDER BY City;",
+      "columns": [
+        "City",
+        "minimum_credit_limit",
+        "maximum_credit_limit"
+      ],
+      "rows": [
+        [
+          "Aberdeen",
+          "1200.00",
+          "50000.00"
+        ],
+        [
+          "Birmingham",
+          "3000.00",
+          "20000.00"
+        ],
+        [
+          "Glasgow",
+          "4000.00",
+          "24000.00"
+        ],
+        [
+          "London",
+          "1500.00",
+          "10000.00"
+        ]
+      ],
+      "row_count": 4,
+      "check": "PASS"
+    }
+  ],
+  "answer_key_results": [
+    {
+      "part2_question": 1,
+      "variant": 1,
+      "sql": "SELECT COUNT(CreditcardNum) FROM creditcard;",
+      "columns": [
+        "COUNT(CreditcardNum)"
+      ],
+      "rows": [
+        [
+          15
+        ]
+      ],
+      "check": "PASS"
+    },
+    {
+      "part2_question": 2,
+      "variant": 1,
+      "sql": "SELECT COUNT(DISTINCT Creditcard_company) FROM creditcard;",
+      "columns": [
+        "COUNT(DISTINCT Creditcard_company)"
+      ],
+      "rows": [
+        [
+          8
+        ]
+      ],
+      "check": "PASS"
+    },
+    {
+      "part2_question": 3,
+      "variant": 1,
+      "sql": "SELECT DISTINCT Creditcard_company FROM creditcard;",
+      "columns": [
+        "Creditcard_company"
+      ],
+      "rows": [
+        [
+          "Capital One"
+        ],
+        [
+          "Coutts Bank"
+        ],
+        [
+          "American Express"
+        ],
+        [
+          "Virgin Credit"
+        ],
+        [
+          "MBNA"
+        ],
+        [
+          "Egg"
+        ],
+        [
+          "Natwest"
+        ],
+        [
+          "Barclaycard"
+        ]
+      ],
+      "check": "PASS"
+    },
+    {
+      "part2_question": 4,
+      "variant": 1,
+      "sql": "SELECT CreditcardNum, Credit_Limit FROM creditcard ORDER BY Credit_Limit DESC;",
+      "columns": [
+        "CreditcardNum",
+        "Credit_Limit"
+      ],
+      "rows": [
+        [
+          2456,
+          "50000.00"
+        ],
+        [
+          4323,
+          "24000.00"
+        ],
+        [
+          3434,
+          "20000.00"
+        ],
+        [
+          3557,
+          "12000.00"
+        ],
+        [
+          4456,
+          "10000.00"
+        ],
+        [
+          1212,
+          "5000.00"
+        ],
+        [
+          3554,
+          "5000.00"
+        ],
+        [
+          4578,
+          "4500.00"
+        ],
+        [
+          3343,
+          "4000.00"
+        ],
+        [
+          3556,
+          "4000.00"
+        ],
+        [
+          3333,
+          "3500.00"
+        ],
+        [
+          2332,
+          "3000.00"
+        ],
+        [
+          4489,
+          "3000.00"
+        ],
+        [
+          4535,
+          "1500.00"
+        ],
+        [
+          3334,
+          "1200.00"
+        ]
+      ],
+      "check": "PASS"
+    },
+    {
+      "part2_question": 5,
+      "variant": 1,
+      "sql": "SELECT CreditcardNum, Credit_Limit FROM creditcard ORDER BY Credit_Limit DESC LIMIT 1;",
+      "columns": [
+        "CreditcardNum",
+        "Credit_Limit"
+      ],
+      "rows": [
+        [
+          2456,
+          "50000.00"
+        ]
+      ],
+      "check": "PASS"
+    },
+    {
+      "part2_question": 5,
+      "variant": 2,
+      "sql": "SELECT CreditcardNum, Credit_Limit FROM creditcard WHERE Credit_Limit = (SELECT MAX(Credit_Limit) FROM creditcard);",
+      "columns": [
+        "CreditcardNum",
+        "Credit_Limit"
+      ],
+      "rows": [
+        [
+          2456,
+          "50000.00"
+        ]
+      ],
+      "check": "PASS"
+    },
+    {
+      "part2_question": 6,
+      "variant": 1,
+      "sql": "SELECT CreditcardNum, City FROM creditcard WHERE City = 'London';",
+      "columns": [
+        "CreditcardNum",
+        "City"
+      ],
+      "rows": [
+        [
+          1212,
+          "London"
+        ],
+        [
+          3333,
+          "London"
+        ],
+        [
+          3556,
+          "London"
+        ],
+        [
+          4456,
+          "London"
+        ],
+        [
+          4535,
+          "London"
+        ]
+      ],
+      "check": "PASS"
+    },
+    {
+      "part2_question": 7,
+      "variant": 1,
+      "sql": "SELECT CreditcardNum, City, Credit_Limit FROM creditcard WHERE City LIKE 'Aber%' AND Credit_Limit > 5000;",
+      "columns": [
+        "CreditcardNum",
+        "City",
+        "Credit_Limit"
+      ],
+      "rows": [
+        [
+          2456,
+          "Aberdeen",
+          "50000.00"
+        ],
+        [
+          3557,
+          "Aberdeen",
+          "12000.00"
+        ]
+      ],
+      "check": "PASS"
+    },
+    {
+      "part2_question": 8,
+      "variant": 1,
+      "sql": "SELECT CreditcardNum, Credit_Limit FROM creditcard WHERE Credit_Limit IN (1200, 3000, 4500);",
+      "columns": [
+        "CreditcardNum",
+        "Credit_Limit"
+      ],
+      "rows": [
+        [
+          2332,
+          "3000.00"
+        ],
+        [
+          3334,
+          "1200.00"
+        ],
+        [
+          4489,
+          "3000.00"
+        ],
+        [
+          4578,
+          "4500.00"
+        ]
+      ],
+      "check": "PASS"
+    },
+    {
+      "part2_question": 9,
+      "variant": 1,
+      "sql": "SELECT CreditcardNum, City FROM creditcard WHERE City <> 'London';",
+      "columns": [
+        "CreditcardNum",
+        "City"
+      ],
+      "rows": [
+        [
+          2332,
+          "Birmingham"
+        ],
+        [
+          2456,
+          "Aberdeen"
+        ],
+        [
+          3334,
+          "Aberdeen"
+        ],
+        [
+          3343,
+          "Glasgow"
+        ],
+        [
+          3434,
+          "Birmingham"
+        ],
+        [
+          3554,
+          "Aberdeen"
+        ],
+        [
+          3557,
+          "Aberdeen"
+        ],
+        [
+          4323,
+          "Glasgow"
+        ],
+        [
+          4489,
+          "Birmingham"
+        ],
+        [
+          4578,
+          "Aberdeen"
+        ]
+      ],
+      "check": "PASS"
+    },
+    {
+      "part2_question": 10,
+      "variant": 1,
+      "sql": "SELECT Creditcard_type, COUNT(Creditcard_type) FROM creditcard WHERE Creditcard_type = 'Mastercard';",
+      "columns": [
+        "Creditcard_type",
+        "COUNT(Creditcard_type)"
+      ],
+      "rows": [
+        [
+          "Mastercard",
+          8
+        ]
+      ],
+      "check": "PASS"
+    },
+    {
+      "part2_question": 10,
+      "variant": 2,
+      "sql": "SELECT Creditcard_type, COUNT(Creditcard_type) FROM creditcard WHERE Creditcard_type = 'Mastercard' OR Creditcard_type = 'Visa' GROUP BY Creditcard_type;",
+      "columns": [
+        "Creditcard_type",
+        "COUNT(Creditcard_type)"
+      ],
+      "rows": [
+        [
+          "Visa",
+          6
+        ],
+        [
+          "Mastercard",
+          8
+        ]
+      ],
+      "check": "PASS"
+    },
+    {
+      "part2_question": 10,
+      "variant": 3,
+      "sql": "SELECT Creditcard_type, COUNT(Creditcard_type) FROM creditcard GROUP BY Creditcard_type HAVING Creditcard_type = 'Mastercard' OR Creditcard_type = 'Visa';",
+      "columns": [
+        "Creditcard_type",
+        "COUNT(Creditcard_type)"
+      ],
+      "rows": [
+        [
+          "Visa",
+          6
+        ],
+        [
+          "Mastercard",
+          8
+        ]
+      ],
+      "check": "PASS"
+    },
+    {
+      "part2_question": 11,
+      "variant": 1,
+      "sql": "SELECT City, COUNT(CreditcardNum) FROM creditcard GROUP BY City;",
+      "columns": [
+        "City",
+        "COUNT(CreditcardNum)"
+      ],
+      "rows": [
+        [
+          "London",
+          5
+        ],
+        [
+          "Birmingham",
+          3
+        ],
+        [
+          "Aberdeen",
+          5
+        ],
+        [
+          "Glasgow",
+          2
+        ]
+      ],
+      "check": "PASS"
+    },
+    {
+      "part2_question": 12,
+      "variant": 1,
+      "sql": "SELECT CardHolder, COUNT(CreditcardNum) FROM creditcard GROUP BY CardHolder;",
+      "columns": [
+        "CardHolder",
+        "COUNT(CreditcardNum)"
+      ],
+      "rows": [
+        [
+          "Krystal Jones",
+          1
+        ],
+        [
+          "Paul Carter",
+          2
+        ],
+        [
+          "Mario Brothers",
+          2
+        ],
+        [
+          "Paul Jones",
+          3
+        ],
+        [
+          "John Mackay",
+          2
+        ],
+        [
+          "Stanley Mathews",
+          1
+        ],
+        [
+          "Julia Kathy",
+          3
+        ],
+        [
+          "John Smith",
+          1
+        ]
+      ],
+      "check": "PASS"
+    },
+    {
+      "part2_question": 13,
+      "variant": 1,
+      "sql": "SELECT City, MIN(Credit_Limit), MAX(Credit_Limit) FROM creditcard GROUP BY City;",
+      "columns": [
+        "City",
+        "MIN(Credit_Limit)",
+        "MAX(Credit_Limit)"
+      ],
+      "rows": [
+        [
+          "London",
+          "1500.00",
+          "10000.00"
+        ],
+        [
+          "Birmingham",
+          "3000.00",
+          "20000.00"
+        ],
+        [
+          "Aberdeen",
+          "1200.00",
+          "50000.00"
+        ],
+        [
+          "Glasgow",
+          "4000.00",
+          "24000.00"
+        ]
+      ],
       "check": "PASS"
     }
   ]

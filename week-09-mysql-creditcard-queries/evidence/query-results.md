@@ -2,7 +2,7 @@
 
 MySQL 9.7.1. Read-only queries on the 15 unchanged reference records in `financial_db.creditcard`.
 
-Questions 1–4 use the existing setup; the structure below was read again in this run. Questions 5–13 are listed in source order with complete outputs.
+Questions 1–4 use the existing setup; the structure below was read again in this run. Original Q5–17 cover all thirteen Part 2 questions, in source order with complete outputs.
 
 ## Table structure (Q2–Q3)
 
@@ -96,7 +96,7 @@ ORDER BY Credit_Limit DESC, CreditcardNum;
 
 Rows returned: 15.
 
-Q8 is interpreted as ordering all cards by descending limit; Q9 selects only the maximum-limit card(s).
+The answer key confirms descending sorting for Q8; Q9 separately selects the maximum-limit card(s).
 
 ## Q09. Card(s) with the highest limit; retain every tie.
 
@@ -189,3 +189,77 @@ ORDER BY CreditcardNum;
 | 4578 | Barclaycard | Mastercard | 4500.00 | 4325.60 | Aberdeen | Julia Kathy | 2020-01-22 |
 
 Rows returned: 10.
+
+## Q14. Number of Mastercard cards (answer-key Part 2 Q10).
+
+```sql
+SELECT Creditcard_type, COUNT(*) AS card_count
+FROM creditcard
+WHERE Creditcard_type = 'Mastercard'
+GROUP BY Creditcard_type;
+```
+
+| Creditcard_type | card_count |
+| --- | --- |
+| Mastercard | 8 |
+
+Rows returned: 1.
+
+## Q15. Number of cards in each city (answer-key Part 2 Q11).
+
+```sql
+SELECT City, COUNT(*) AS card_count
+FROM creditcard
+GROUP BY City
+ORDER BY City;
+```
+
+| City | card_count |
+| --- | --- |
+| Aberdeen | 5 |
+| Birmingham | 3 |
+| Glasgow | 2 |
+| London | 5 |
+
+Rows returned: 4.
+
+## Q16. Number of cards held by each cardholder (answer-key Part 2 Q12).
+
+```sql
+SELECT CardHolder, COUNT(*) AS card_count
+FROM creditcard
+GROUP BY CardHolder
+ORDER BY CardHolder;
+```
+
+| CardHolder | card_count |
+| --- | --- |
+| John Mackay | 2 |
+| John Smith | 1 |
+| Julia Kathy | 3 |
+| Krystal Jones | 1 |
+| Mario Brothers | 2 |
+| Paul Carter | 2 |
+| Paul Jones | 3 |
+| Stanley Mathews | 1 |
+
+Rows returned: 8.
+
+## Q17. Minimum and maximum credit limits by city (answer-key Part 2 Q13).
+
+```sql
+SELECT City, MIN(Credit_Limit) AS minimum_credit_limit,
+       MAX(Credit_Limit) AS maximum_credit_limit
+FROM creditcard
+GROUP BY City
+ORDER BY City;
+```
+
+| City | minimum_credit_limit | maximum_credit_limit |
+| --- | --- | --- |
+| Aberdeen | 1200.00 | 50000.00 |
+| Birmingham | 3000.00 | 20000.00 |
+| Glasgow | 4000.00 | 24000.00 |
+| London | 1500.00 | 10000.00 |
+
+Rows returned: 4.

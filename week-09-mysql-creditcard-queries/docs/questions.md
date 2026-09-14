@@ -1,6 +1,6 @@
-# Source questions 1–13
+# Source questions and answer-key mapping
 
-Numbering follows the original Word list, including the six subparts of question 3. Questions 14–26 are outside this activity.
+Original questions 1–4 are setup. Original Q5–17 correspond to Part 2 Q1–13 in the answer key; the six subparts of Q3 are retained. Original Q18–26 continue in Week 10.
 
 ## 1. Create a table named Creditcard with the entire column in the excel sheet called Creditcard.csv.
 
@@ -34,3 +34,11 @@ Numbering follows the original Word list, including the six subparts of question
 ## 12. List all credit cards that were issued with credit limits of £1200, £3000 and £4500.
 
 ## 13. List all credit cards that were not issued in London?
+
+## 14. Find the number of Mastercard that were issued?
+
+## 15. Find the number of credit cards that were issued in each City?
+
+## 16. Display the number of credit cards that were issued to each Cardholder?
+
+## 17. What is the minimum and maximum credit limit issued in the different Cities?
