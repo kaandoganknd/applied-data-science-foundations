@@ -18,3 +18,10 @@ Each folder contains the analysis code, a concise summary of the findings, and c
 ## Tools
 
 IBM SPSS Statistics, MySQL, and Python.
+
+## Assessment case studies
+
+The larger assessment projects are published separately, with their full reports, original evidence and reproducibility checks:
+
+- [EV Charging Behaviour Analysis](https://github.com/kaandoganknd/ev-charging-behaviour-analysis) — 800 charging sessions, SPSS hypothesis testing, HC3 regression inference and independent Python verification.
+- [E-commerce Database & Analytics](https://github.com/kaandoganknd/ecommerce-database-analytics) — six-table MySQL design, integrity triggers, four business queries and live database tests.
